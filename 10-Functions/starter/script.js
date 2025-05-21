@@ -161,3 +161,27 @@ registerStudent('Abrar', '6', true);
 registerStudent('sondos');
 
 // ---
+
+// s-3 first class function & higher order function
+const upperFirstWord = function (str) {
+  const [firstWord, ...other] = str.split(' ');
+  return [firstWord.toUpperCase(), ...other].join(' ');
+};
+
+const oneWord = function (str) {
+  return str.replaceAll(' ', '');
+};
+function tranformer(str, fun) {
+  console.log(` hi , ${fun(str)}`);
+  console.log(' function name : ', fun.name);
+}
+tranformer('JavaScript is the best!', upperFirstWord);
+tranformer('JavaScript is the best!', oneWord);
+
+const test = function (t) {
+  console.log('👏');
+};
+
+document.body.addEventListener('click', test);
+const arr = [1, 2, 3];
+arr.forEach(test);
