@@ -211,3 +211,38 @@ const createGreeterShort = greeting => personName =>
   console.log(greeting, personName);
 const greeterShort = createGreeterShort('Hey');
 greeterShort('Tolip');
+
+// the call & apply methods
+
+const userSondos = {
+  firstName: 'Sondos',
+  lastName: 'Amr',
+  showLocation(country, city) {
+    console.log(
+      `Hi, I'm ${this.firstName} ${this.lastName}, and I currently live in ${city}, ${country}.`
+    );
+  },
+};
+
+const userAbrar = {
+  firstName: 'Abrar',
+  lastName: 'Amr',
+};
+
+const showUserLocation = userSondos.showLocation;
+
+// Direct method call
+userSondos.showLocation('Egypt', '10th of Ramadan City');
+userSondos.showLocation('USA', 'California');
+
+// Using call to set `this`
+showUserLocation.call(userSondos, 'UK', 'London');
+showUserLocation.call(userAbrar, 'Palestine', 'Gaza');
+
+// Using apply with location data array
+const abrarLocation = ['Palestine', 'Gaza'];
+showUserLocation.apply(userAbrar, abrarLocation);
+
+// Using spread operator with data
+const sondosNewLocation = ['Germany', 'Berlin'];
+showUserLocation.call(userSondos, ...sondosNewLocation);
