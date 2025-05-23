@@ -246,3 +246,8 @@ showUserLocation.apply(userAbrar, abrarLocation);
 // Using spread operator with data
 const sondosNewLocation = ['Germany', 'Berlin'];
 showUserLocation.call(userSondos, ...sondosNewLocation);
+
+// the bind method
+
+const userLocation = showUserLocation.bind(userSondos);
+userLocation('chaina', 'HongKong');
