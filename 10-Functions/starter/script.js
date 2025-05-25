@@ -411,4 +411,16 @@ poll.registerNewAnswer = function () {
     console.log('Invalid input');
   }
 };
+
 const pollRegist = poll.registerNewAnswer.bind(poll);
+
+poll.displayResults = function (type = 'array') {
+  if (type.toLowerCase().trim() === 'string') {
+    console.log(` Poll results are ${this.answers.join(' , ')}`);
+  } else {
+    console.log(this.answers);
+  }
+};
+poll.displayResults('array');
+poll.displayResults('string');
+poll.displayResults();
