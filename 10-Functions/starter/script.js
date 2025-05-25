@@ -411,3 +411,4 @@ poll.registerNewAnswer = function () {
     console.log('Invalid input');
   }
 };
+const pollRegist = poll.registerNewAnswer.bind(poll);
