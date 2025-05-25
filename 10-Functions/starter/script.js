@@ -391,3 +391,23 @@ const poll = {
   options: ['0 : JS', '1 : Python', ' 2 : Rust', ' 3 : C++'],
   answers: new Array(4).fill(0),
 };
+
+poll.registerNewAnswer = function () {
+  const questionAsk = Number(
+    prompt(` ${this.question} \n ${this.options.join(
+      '\n'
+    )} \n (Write option number)
+    `)
+  );
+  if (
+    typeof questionAsk === 'number' &&
+    Number.isInteger(questionAsk) &&
+    questionAsk >= 0 &&
+    questionAsk <= 3
+  ) {
+    console.log(questionAsk);
+    this.answers[questionAsk]++;
+  } else {
+    console.log('Invalid input');
+  }
+};
