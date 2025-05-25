@@ -424,3 +424,13 @@ poll.displayResults = function (type = 'array') {
 poll.displayResults('array');
 poll.displayResults('string');
 poll.displayResults();
+
+const btn = document.querySelector('.poll');
+btn.addEventListener('click', pollRegist);
+
+const externalPollData = {
+  answers: [1, 5, 3, 9, 6, 1],
+};
+
+const displayResultsFn = poll.displayResults;
+displayResultsFn.call(externalPollData, 'string');
