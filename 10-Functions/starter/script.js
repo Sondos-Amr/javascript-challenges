@@ -189,148 +189,148 @@
 // Functions Returning Functions
 
 // Regular function expression that returns another function
-const createGreeter = function (greeting) {
-  return function (personName) {
-    console.log(greeting, personName);
-  };
-};
-const greeterHey = createGreeter('Hey');
-greeterHey('Sondos');
+// const createGreeter = function (greeting) {
+//   return function (personName) {
+//     console.log(greeting, personName);
+//   };
+// };
+// const greeterHey = createGreeter('Hey');
+// greeterHey('Sondos');
 
 // Arrow function version returning another function
-const createGreeterArrow = greeting => {
-  return personName => {
-    console.log(greeting, personName);
-  };
-};
-const greeterArrow = createGreeterArrow('Hey');
-greeterArrow('Abrar');
+// const createGreeterArrow = greeting => {
+//   return personName => {
+//     console.log(greeting, personName);
+//   };
+// };
+// const greeterArrow = createGreeterArrow('Hey');
+// greeterArrow('Abrar');
 
 // Shorter arrow function version
-const createGreeterShort = greeting => personName =>
-  console.log(greeting, personName);
-const greeterShort = createGreeterShort('Hey');
-greeterShort('Tolip');
+// const createGreeterShort = greeting => personName =>
+//   console.log(greeting, personName);
+// const greeterShort = createGreeterShort('Hey');
+// greeterShort('Tolip');
 
 // the call & apply methods
 
-const userSondos = {
-  firstName: 'Sondos',
-  lastName: 'Amr',
-  showLocation(country, city) {
-    console.log(
-      `Hi, I'm ${this.firstName} ${this.lastName}, and I currently live in ${city}, ${country}.`
-    );
-  },
-};
+// const userSondos = {
+//   firstName: 'Sondos',
+//   lastName: 'Amr',
+//   showLocation(country, city) {
+//     console.log(
+//       `Hi, I'm ${this.firstName} ${this.lastName}, and I currently live in ${city}, ${country}.`
+//     );
+//   },
+// };
 
-const userAbrar = {
-  firstName: 'Abrar',
-  lastName: 'Amr',
-};
+// const userAbrar = {
+//   firstName: 'Abrar',
+//   lastName: 'Amr',
+// };
 
-const showUserLocation = userSondos.showLocation;
+// const showUserLocation = userSondos.showLocation;
 
 // Direct method call
-userSondos.showLocation('Egypt', '10th of Ramadan City');
-userSondos.showLocation('USA', 'California');
+// userSondos.showLocation('Egypt', '10th of Ramadan City');
+// userSondos.showLocation('USA', 'California');
 
 // Using call to set `this`
-showUserLocation.call(userSondos, 'UK', 'London');
-showUserLocation.call(userAbrar, 'Palestine', 'Gaza');
+// showUserLocation.call(userSondos, 'UK', 'London');
+// showUserLocation.call(userAbrar, 'Palestine', 'Gaza');
 
 // Using apply with location data array
-const abrarLocation = ['Palestine', 'Gaza'];
-showUserLocation.apply(userAbrar, abrarLocation);
+// const abrarLocation = ['Palestine', 'Gaza'];
+// showUserLocation.apply(userAbrar, abrarLocation);
 
 // Using spread operator with data
-const sondosNewLocation = ['Germany', 'Berlin'];
-showUserLocation.call(userSondos, ...sondosNewLocation);
+// const sondosNewLocation = ['Germany', 'Berlin'];
+// showUserLocation.call(userSondos, ...sondosNewLocation);
 
 // the bind method
 
-const userLocation = showUserLocation.bind(userSondos);
-userLocation('chaina', 'HongKong');
+// const userLocation = showUserLocation.bind(userSondos);
+// userLocation('chaina', 'HongKong');
 
 // another example :
 
 // The call and apply Methods
-const lufthansa = {
-  airline: 'Lufthansa',
-  iataCode: 'LH',
-  bookings: [],
-  // book: function() {}
-  book(flightNum, name) {
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
-    );
-    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
-  },
-};
+// const lufthansa = {
+//   airline: 'Lufthansa',
+//   iataCode: 'LH',
+//   bookings: [],
+//   // book: function() {}
+//   book(flightNum, name) {
+//     console.log(
+//       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+//     );
+//     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+//   },
+// };
 
-lufthansa.book(239, 'Jonas Schmedtmann');
-lufthansa.book(635, 'John Smith');
+// lufthansa.book(239, 'Jonas Schmedtmann');
+// lufthansa.book(635, 'John Smith');
 
-const eurowings = {
-  airline: 'Eurowings',
-  iataCode: 'EW',
-  bookings: [],
-};
+// const eurowings = {
+//   airline: 'Eurowings',
+//   iataCode: 'EW',
+//   bookings: [],
+// };
 
-const book = lufthansa.book;
+// const book = lufthansa.book;
 
 // Does NOT work
 // book(23, 'Sarah Williams');
 
 // Call method
-book.call(eurowings, 23, 'Sarah Williams');
-console.log(eurowings);
+// book.call(eurowings, 23, 'Sarah Williams');
+// console.log(eurowings);
 
-book.call(lufthansa, 239, 'Mary Cooper');
-console.log(lufthansa);
+// book.call(lufthansa, 239, 'Mary Cooper');
+// console.log(lufthansa);
 
-const swiss = {
-  airline: 'Swiss Air Lines',
-  iataCode: 'LX',
-  bookings: [],
-};
+// const swiss = {
+//   airline: 'Swiss Air Lines',
+//   iataCode: 'LX',
+//   bookings: [],
+// };
 
-book.call(swiss, 583, 'Mary Cooper');
+// book.call(swiss, 583, 'Mary Cooper');
 
-// Apply method
-const flightData = [583, 'George Cooper'];
-book.apply(swiss, flightData);
-console.log(swiss);
+// // Apply method
+// const flightData = [583, 'George Cooper'];
+// book.apply(swiss, flightData);
+// console.log(swiss);
 
-book.call(swiss, ...flightData);
+// book.call(swiss, ...flightData);
 
 ///////////////////////////////////////
 // The bind Method
 // book.call(eurowings, 23, 'Sarah Williams');
 
-const bookEW = book.bind(eurowings);
-const bookLH = book.bind(lufthansa);
-const bookLX = book.bind(swiss);
+// const bookEW = book.bind(eurowings);
+// const bookLH = book.bind(lufthansa);
+// const bookLX = book.bind(swiss);
 
-bookEW(23, 'Steven Williams');
+// bookEW(23, 'Steven Williams');
 
-const bookEW23 = book.bind(eurowings, 23);
-bookEW23('Jonas Schmedtmann');
-bookEW23('Martha Cooper');
+// const bookEW23 = book.bind(eurowings, 23);
+// bookEW23('Jonas Schmedtmann');
+// bookEW23('Martha Cooper');
 
-// With Event Listeners
-lufthansa.planes = 300;
-lufthansa.buyPlane = function () {
-  console.log(this);
+// // With Event Listeners
+// lufthansa.planes = 300;
+// lufthansa.buyPlane = function () {
+//   console.log(this);
 
-  this.planes++;
-  console.log(this.planes);
-};
-// lufthansa.buyPlane();
+//   this.planes++;
+//   console.log(this.planes);
+// };
+// // lufthansa.buyPlane();
 
-document
-  .querySelector('.buy')
-  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// document
+//   .querySelector('.buy')
+//   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
 // Partial application
 
@@ -344,10 +344,50 @@ document
 // console.log(addVAT(100));
 // console.log(addVAT(23));
 
-function addTax(rate) {
-  return function (value) {
-    return value + value * rate;
-  };
-}
-const t = addTax(0.23);
-t(200);
+// function addTax(rate) {
+//   return function (value) {
+//     return value + value * rate;
+//   };
+// }
+// const t = addTax(0.23);
+// t(200);
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+/* 
+Let's build a simple poll app!
+
+A poll has a question, an array of options from which people can choose, and an array with the number of replies for each option. This data is stored in the starter object below.
+
+Here are your tasks:
+
+1. Create a method called 'registerNewAnswer' on the 'poll' object. The method does 2 things:
+  1.1. Display a prompt window for the user to input the number of the selected option. The prompt should look like this:
+        What is your favourite programming language?
+        0: JavaScript
+        1: Python
+        2: Rust
+        3: C++
+        (Write option number)
+  
+  1.2. Based on the input number, update the answers array. For example, if the option is 3, increase the value AT POSITION 3 of the array by 1. Make sure to check if the input is a number and if the number makes sense (e.g answer 52 wouldn't make sense, right?)
+2. Call this method whenever the user clicks the "Answer poll" button.
+3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
+4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
+
+HINT: Use many of the tools you learned about in this and the last section 😉
+
+BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what shoud the this keyword look like in this situation?
+
+BONUS TEST DATA 1: [5, 2, 3]
+BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
+
+GOOD LUCK 😀
+*/
+
+const poll = {
+  question: 'What is your favourite programming language ?',
+  options: ['0 : JS', '1 : Python', ' 2 : Rust', ' 3 : C++'],
+  answers: new Array(4).fill(0),
+};
