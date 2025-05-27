@@ -386,50 +386,73 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-const poll = {
-  question: 'What is your favourite programming language ?',
-  options: ['0 : JS', '1 : Python', ' 2 : Rust', ' 3 : C++'],
-  answers: new Array(4).fill(0),
-};
+// const poll = {
+//   question: 'What is your favourite programming language ?',
+//   options: ['0 : JS', '1 : Python', ' 2 : Rust', ' 3 : C++'],
+//   answers: new Array(4).fill(0),
+// };
 
-poll.registerNewAnswer = function () {
-  const answer = Number(
-    prompt(` ${this.question} \n ${this.options.join(
-      '\n'
-    )} \n (Write option number)
-    `)
-  );
-  if (
-    typeof answer === 'number' &&
-    Number.isInteger(answer) &&
-    answer >= 0 &&
-    answer <= this.answers.length
-  ) {
-    this.answers[answer]++;
-  } else {
-    console.log('Invalid input');
-  }
-  this.displayResults();
-  this.displayResults('string');
-};
+// poll.registerNewAnswer = function () {
+//   const answer = Number(
+//     prompt(` ${this.question} \n ${this.options.join(
+//       '\n'
+//     )} \n (Write option number)
+//     `)
+//   );
+//   if (
+//     typeof answer === 'number' &&
+//     Number.isInteger(answer) &&
+//     answer >= 0 &&
+//     answer <= this.answers.length
+//   ) {
+//     this.answers[answer]++;
+//   } else {
+//     console.log('Invalid input');
+//   }
+//   this.displayResults();
+//   this.displayResults('string');
+// };
 
-const pollRegist = poll.registerNewAnswer.bind(poll);
+// const pollRegist = poll.registerNewAnswer.bind(poll);
 
-poll.displayResults = function (type = 'array') {
-  if (type.toLowerCase().trim() === 'string') {
-    console.log(` Poll results are ${this.answers.join(' , ')}`);
-  } else {
-    console.log(this.answers);
-  }
-};
+// poll.displayResults = function (type = 'array') {
+//   if (type.toLowerCase().trim() === 'string') {
+//     console.log(` Poll results are ${this.answers.join(' , ')}`);
+//   } else {
+//     console.log(this.answers);
+//   }
+// };
 
-const btn = document.querySelector('.poll');
-btn.addEventListener('click', pollRegist);
+// const btn = document.querySelector('.poll');
+// btn.addEventListener('click', pollRegist);
 
-const externalPollData = {
-  answers: [1, 5, 3, 9, 6, 1],
-};
+// const externalPollData = {
+//   answers: [1, 5, 3, 9, 6, 1],
+// };
 
-const displayResultsFn = poll.displayResults;
-displayResultsFn.call(externalPollData, 'string');
-displayResultsFn.call(externalPollData, 'array');
+// const displayResultsFn = poll.displayResults;
+// displayResultsFn.call(externalPollData, 'string');
+// displayResultsFn.call(externalPollData, 'array');
+
+// Immediately Invoked Function Expressions (IIFE)
+
+// (function () {
+//   console.log('say hi');
+// })()
+// IIFE with arrow function
+
+//   (() => {
+//     console.log('say hi');
+//   }
+// )();
+
+// IIFE with block {}
+
+{
+  const x = 5;
+  let z = 10;
+  var i = 15;
+}
+// console.log(x);
+// console.log(z);
+console.log(i);
