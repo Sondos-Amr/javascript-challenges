@@ -607,7 +607,7 @@
 
 // assignment for-of loop in araay
 
-8.1;
+// 8.1;
 // Use the for-of loop to loop over the books array and sum the pages of all books. Use the pageSum variable below, and the pages property of the book objects.
 
 // let pageSum = 0;

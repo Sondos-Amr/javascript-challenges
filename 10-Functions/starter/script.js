@@ -393,23 +393,24 @@ const poll = {
 };
 
 poll.registerNewAnswer = function () {
-  const questionAsk = Number(
+  const answer = Number(
     prompt(` ${this.question} \n ${this.options.join(
       '\n'
     )} \n (Write option number)
     `)
   );
   if (
-    typeof questionAsk === 'number' &&
-    Number.isInteger(questionAsk) &&
-    questionAsk >= 0 &&
-    questionAsk <= 3
+    typeof answer === 'number' &&
+    Number.isInteger(answer) &&
+    answer >= 0 &&
+    answer <= this.answers.length
   ) {
-    console.log(questionAsk);
-    this.answers[questionAsk]++;
+    this.answers[answer]++;
   } else {
     console.log('Invalid input');
   }
+  this.displayResults();
+  this.displayResults('string');
 };
 
 const pollRegist = poll.registerNewAnswer.bind(poll);
@@ -421,9 +422,6 @@ poll.displayResults = function (type = 'array') {
     console.log(this.answers);
   }
 };
-poll.displayResults('array');
-poll.displayResults('string');
-poll.displayResults();
 
 const btn = document.querySelector('.poll');
 btn.addEventListener('click', pollRegist);
@@ -434,3 +432,4 @@ const externalPollData = {
 
 const displayResultsFn = poll.displayResults;
 displayResultsFn.call(externalPollData, 'string');
+displayResultsFn.call(externalPollData, 'array');
