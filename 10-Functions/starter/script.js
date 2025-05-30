@@ -448,11 +448,59 @@ GOOD LUCK 😀
 
 // IIFE with block {}
 
-{
-  const x = 5;
-  let z = 10;
-  var i = 15;
-}
+// {
+//   const x = 5;
+//   let z = 10;
+//   var i = 15;
+// }
 // console.log(x);
 // console.log(z);
-console.log(i);
+// console.log(i);
+
+// Closures
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(passengerCount, 'passengers');
+  };
+};
+const booker = secureBooking();
+booker();
+
+// example 1
+let f;
+function g() {
+  let a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+}
+
+const h = function () {
+  let b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+// first function
+g();
+f();
+
+// second function : Re-assigning f function
+h();
+f();
+
+// example 2
+
+const x = function (num, wait) {
+  // const p = num / 3;
+  console.log('start');
+  setTimeout(function () {
+    console.log(` wait ${wait}  and number ${num} per ${p}`);
+  }, num * wait);
+  console.log('end');
+};
+const p = 10;
+
+x(180, 20);
