@@ -458,52 +458,52 @@ GOOD LUCK 😀
 // console.log(i);
 
 // Closures
-const secureBooking = function () {
-  let passengerCount = 0;
-  return function () {
-    passengerCount++;
-    console.log(passengerCount, 'passengers');
-  };
-};
-const booker = secureBooking();
-booker();
+// const secureBooking = function () {
+//   let passengerCount = 0;
+//   return function () {
+//     passengerCount++;
+//     console.log(passengerCount, 'passengers');
+//   };
+// };
+// const booker = secureBooking();
+// booker();
 
-// example 1
-let f;
-function g() {
-  let a = 23;
-  f = function () {
-    console.log(a * 2);
-  };
-}
+// // example 1
+// let f;
+// function g() {
+//   let a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// }
 
-const h = function () {
-  let b = 777;
-  f = function () {
-    console.log(b * 2);
-  };
-};
-// first function
-g();
-f();
+// const h = function () {
+//   let b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
+// // first function
+// g();
+// f();
 
-// second function : Re-assigning f function
-h();
-f();
+// // second function : Re-assigning f function
+// h();
+// f();
 
-// example 2
+// // example 2
 
-const x = function (num, wait) {
-  // const p = num / 3;
-  console.log('start');
-  setTimeout(function () {
-    console.log(` wait ${wait}  and number ${num} per ${p}`);
-  }, num * wait);
-  console.log('end');
-};
-const p = 10;
+// const x = function (num, wait) {
+//   // const p = num / 3;
+//   console.log('start');
+//   setTimeout(function () {
+//     console.log(` wait ${wait}  and number ${num} per ${p}`);
+//   }, num * wait);
+//   console.log('end');
+// };
+// const p = 10;
 
-x(180, 20);
+// x(180, 20);
 
 ///////////////////////////////////////
 // Coding Challenge #2
@@ -518,15 +518,15 @@ And now explain to YOURSELF (or someone around you) WHY this worked! Take all th
 GOOD LUCK 😀
 */
 
-const changeColor = (function () {
-  const header = document.querySelector('h1');
-  header.style.color = 'red';
+// const changeColor = (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
 
-  return function () {
-    document.body.addEventListener('click', function () {
-      header.style.color = 'blue';
-    });
-  };
-})();
+//   return function () {
+//     document.body.addEventListener('click', function () {
+//       header.style.color = 'blue';
+//     });
+//   };
+// })();
 
-changeColor();
+// changeColor();
