@@ -71,31 +71,68 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
 /////////////////////////////////////////////////
 
 //  slice method
 
-const arr = ['a', 'b', 'c', 'd', 'e'];
-console.log(arr.slice(2)); // it make new array
-console.log(arr.slice(1, 3)); // start parmeter and end note: end parmeter not include the last index
-console.log(arr.slice(-3, -1)); // u can use negative value
-console.log(arr.slice(1, -2)); // u can custom between positive and  nagative parmeters
-console.log(arr.slice()); // shallo it means copy
-console.log([...arr]); // cope with spread operator
+// const arr = ['a', 'b', 'c', 'd', 'e'];
+// console.log(arr.slice(2)); // it make new array
+// console.log(arr.slice(1, 3)); // start parmeter and end note: end parmeter not include the last index
+// console.log(arr.slice(-3, -1)); // u can use negative value
+// console.log(arr.slice(1, -2)); // u can custom between positive and  nagative parmeters
+// console.log(arr.slice()); // shallo it means copy
+// console.log([...arr]); // cope with spread operator
 
 // splice method
-console.log('splice method');
-console.log(arr.splice(0, 2)); // it return select ele or deleted ele in new array
-console.log(arr); // print orignal array without slice ele or delete ele
+// console.log('splice method');
+// console.log(arr.splice(0, 2)); // it return select ele or deleted ele in new array
+// console.log(arr); // print orignal array without slice ele or delete ele
 
 // at method
-console.log(arr[0]);
-console.log(arr.at(0));
+// console.log(arr[0]);
+// console.log(arr.at(0));
 
-console.log(arr[-1]); // it is not work the result is undefind
-console.log(arr[arr.length - 1]); // it work
-console.log(arr.at(-1));
+// console.log(arr[-1]); // it is not work the result is undefind
+// console.log(arr[arr.length - 1]); // it work
+// console.log(arr.at(-1));
 // u can used with string like this ;
-console.log('sondos'.at(0));
+// console.log('sondos'.at(0));
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// looping array
+
+for (const [i, mov] of movements.entries()) {
+  if (mov > 0) {
+    console.log(`${i + 1} you deposited ${mov} `);
+  } else {
+    console.log(` you withdraw ${Math.abs(mov)}`);
+  }
+}
+
+console.log('---- forEach ----- ');
+
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`${i + 1} you deposited ${mov} `);
+  } else {
+    console.log(` you withdraw ${Math.abs(mov)}`);
+  }
+});
+
+// forEach with arrow function
+
+movements.forEach((ele, i, arr) => {
+  console.log(`${i + 1}: ${Math.abs(ele)}`);
+});
+
+// when we use entir array in the forEach
+
+const fruits = ['apple', 'banana', 'cherry'];
+
+fruits.forEach(function (fruit, index, arr) {
+  let nextFruit = arr[index + 1]; // get the next item
+  if (!nextFruit) nextFruit = 'No more fruits'; // if there is no next item
+
+  console.log(fruit + ' is followed by ' + nextFruit);
+});
