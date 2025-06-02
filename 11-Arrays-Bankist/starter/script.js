@@ -65,12 +65,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
 /////////////////////////////////////////////////
 
 //  slice method
@@ -98,41 +92,58 @@ const currencies = new Map([
 // u can used with string like this ;
 // console.log('sondos'.at(0));
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// looping array
+// // looping array
 
-for (const [i, mov] of movements.entries()) {
-  if (mov > 0) {
-    console.log(`${i + 1} you deposited ${mov} `);
-  } else {
-    console.log(` you withdraw ${Math.abs(mov)}`);
-  }
-}
+// for (const [i, mov] of movements.entries()) {
+//   if (mov > 0) {
+//     console.log(`${i + 1} you deposited ${mov} `);
+//   } else {
+//     console.log(` you withdraw ${Math.abs(mov)}`);
+//   }
+// }
 
-console.log('---- forEach ----- ');
+// console.log('---- forEach ----- ');
 
-movements.forEach(function (mov, i, arr) {
-  if (mov > 0) {
-    console.log(`${i + 1} you deposited ${mov} `);
-  } else {
-    console.log(` you withdraw ${Math.abs(mov)}`);
-  }
+// movements.forEach(function (mov, i, arr) {
+//   if (mov > 0) {
+//     console.log(`${i + 1} you deposited ${mov} `);
+//   } else {
+//     console.log(` you withdraw ${Math.abs(mov)}`);
+//   }
+// });
+
+// // forEach with arrow function
+
+// movements.forEach((ele, i, arr) => {
+//   console.log(`${i + 1}: ${Math.abs(ele)}`);
+// });
+
+// // when we use entir array in the forEach
+
+// const fruits = ['apple', 'banana', 'cherry'];
+
+// fruits.forEach(function (fruit, index, arr) {
+//   let nextFruit = arr[index + 1]; // get the next item
+//   if (!nextFruit) nextFruit = 'No more fruits'; // if there is no next item
+
+//   console.log(fruit + ' is followed by ' + nextFruit);
+// });
+
+// forEach With Maps and Sets
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((value, key, map) => {
+  console.log(key, value, map);
 });
 
-// forEach with arrow function
-
-movements.forEach((ele, i, arr) => {
-  console.log(`${i + 1}: ${Math.abs(ele)}`);
-});
-
-// when we use entir array in the forEach
-
-const fruits = ['apple', 'banana', 'cherry'];
-
-fruits.forEach(function (fruit, index, arr) {
-  let nextFruit = arr[index + 1]; // get the next item
-  if (!nextFruit) nextFruit = 'No more fruits'; // if there is no next item
-
-  console.log(fruit + ' is followed by ' + nextFruit);
+const set = new Set([1, 2, 3, 4, 1, 4]);
+set.forEach((value, _, set) => {
+  console.log(value);
 });
