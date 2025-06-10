@@ -239,22 +239,46 @@ GOOD LUCK 😀
 
 // Chaining Methods
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${balance}€`;
+// const calcDisplayBalance = function (movements) {
+//   const balance = movements
+//     .filter(mov => mov > 0)
+//     .reduce((acc, mov) => acc + mov, 0);
+//   labelSumIn.textContent = `${balance}€`;
 
-  const out = movements
-    .filter(mov => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+//   const out = movements
+//     .filter(mov => mov < 0)
+//     .reduce((acc, mov) => acc + mov, 0);
+//   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
-    .filter(init => init >= 1)
-    .reduce((acc, init) => acc + init, 0);
-  labelSumInterest.textContent = `${interest}€`;
+//   const interest = movements
+//     .filter(mov => mov > 0)
+//     .map(deposit => (deposit * 1.2) / 100)
+//     .filter(init => init >= 1)
+//     .reduce((acc, init) => acc + init, 0);
+//   labelSumInterest.textContent = `${interest}€`;
+// };
+// calcDisplayBalance(account1.movements);
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+const calcAverageHumanAge = ages => {
+  return ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(age => age >= 18)
+    .reduce((act, age, i, arr) => act + age / arr.length, 0);
 };
-calcDisplayBalance(account1.movements);
+const dogsAges1 = [5, 2, 4, 1, 15, 8, 3];
+const avg1 = calcAverageHumanAge(dogsAges1);
+console.log(avg1);
+const dogsAges2 = [16, 6, 10, 5, 6, 1, 4];
+const avg2 = calcAverageHumanAge(dogsAges2);
+console.log(avg2);
