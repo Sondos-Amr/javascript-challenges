@@ -33,7 +33,7 @@ const account4 = {
   pin: 4444,
 };
 
-// const accounts = [account1, account2, account3, account4];
+const accounts = [account1, account2, account3, account4];
 
 // // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -270,15 +270,34 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-const calcAverageHumanAge = ages => {
-  return ages
-    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
-    .filter(age => age >= 18)
-    .reduce((act, age, i, arr) => act + age / arr.length, 0);
-};
-const dogsAges1 = [5, 2, 4, 1, 15, 8, 3];
-const avg1 = calcAverageHumanAge(dogsAges1);
-console.log(avg1);
-const dogsAges2 = [16, 6, 10, 5, 6, 1, 4];
-const avg2 = calcAverageHumanAge(dogsAges2);
-console.log(avg2);
+// const calcAverageHumanAge = ages => {
+//   return ages
+//     .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+//     .filter(age => age >= 18)
+//     .reduce((act, age, i, arr) => act + age / arr.length, 0);
+// };
+// const dogsAges1 = [5, 2, 4, 1, 15, 8, 3];
+// const avg1 = calcAverageHumanAge(dogsAges1);
+// console.log(avg1);
+// const dogsAges2 = [16, 6, 10, 5, 6, 1, 4];
+// const avg2 = calcAverageHumanAge(dogsAges2);
+// console.log(avg2);
+
+// the find method();
+
+const firstWithdrawal = account1.movements.find(mov => mov < 0);
+console.log(account1.movements);
+console.log(firstWithdrawal);
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+let account22;
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') {
+    account22 = acc;
+    break;
+  }
+}
+console.log(account22);
