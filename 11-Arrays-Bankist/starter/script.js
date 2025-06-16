@@ -62,7 +62,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 // functions
 
-const creatUserName = function (accs) {
+const createUserName = function (accs) {
   accs.forEach(function (acc) {
     acc.userName = acc.owner
       .toLowerCase()
@@ -71,7 +71,7 @@ const creatUserName = function (accs) {
       .join('');
   });
 };
-creatUserName(accounts);
+console.log(createUserName(accounts));
 
 const calcDisplayMovments = function (movs) {
   containerMovements.innerHTML = '';
@@ -142,6 +142,15 @@ const displatBtnLogin = btnLogin.addEventListener('click', function (e) {
     calcDisplayBalance(currentAcc.movements);
     calcDisplaySummary(currentAcc);
   }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.userName === inputTransferTo.value
+  );
+  console.log(receiverAcc, amount);
 });
 
 // console.log(accounts);
