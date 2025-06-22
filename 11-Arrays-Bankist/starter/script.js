@@ -71,7 +71,7 @@ const createUserName = function (accs) {
       .join('');
   });
 };
-console.log(createUserName(accounts));
+createUserName(accounts);
 
 const calcDisplayMovments = function (movs) {
   containerMovements.innerHTML = '';
@@ -96,9 +96,10 @@ const calcDisplayMovments = function (movs) {
 // const withdrawals = account1.movements.filter(mov => mov < 0);
 // console.log(withdrawals);
 
-const calcDisplayBalance = function (movs) {
-  const balance = movs.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (accunt) {
+  const balance = accunt.movements.reduce((acc, mov) => acc + mov, 0);
+  accunt.balance = balance;
+  labelBalance.textContent = `${accunt.balance}€`;
 };
 // console.log(calcDisplayBalance(account1.movements));
 
@@ -122,7 +123,12 @@ const calcDisplaySummary = function (account) {
   labelSumInterest.textContent = `${interest}€`;
 };
 // calcDisplaySummary(account1.movements);
-
+// update ui
+const updateUi = function (acc) {
+  calcDisplayMovments(acc.movements);
+  calcDisplayBalance(acc);
+  calcDisplaySummary(acc);
+};
 // Implementing login
 let currentAcc;
 const displatBtnLogin = btnLogin.addEventListener('click', function (e) {
@@ -137,10 +143,10 @@ const displatBtnLogin = btnLogin.addEventListener('click', function (e) {
       currentAcc.owner.split(' ')[0]
     }`;
     inputLoginUsername.value = inputLoginPin.value = '';
+    inputTransferAmount.value = inputTransferTo.value = '';
+    inputCloseUsername.value = inputClosePin.value = '';
     inputLoginPin.blur();
-    calcDisplayMovments(currentAcc.movements);
-    calcDisplayBalance(currentAcc.movements);
-    calcDisplaySummary(currentAcc);
+    updateUi(currentAcc);
   }
 });
 
@@ -148,9 +154,18 @@ btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
   const receiverAcc = accounts.find(
-    acc => acc.userName === inputTransferTo.value
+    acc => acc.userName === inputTransferTo.value.trim()
   );
-  console.log(receiverAcc, amount);
+  if (!receiverAcc)
+    return alert('This account doesn’t exist, please try again.');
+  if (receiverAcc?.userName === currentAcc.userName)
+    return alert('You cannot send money to yourself.');
+  if (amount <= 0) return alert('Please enter a valid amount.');
+  if (currentAcc.balance < amount) return alert('Your balance is too low.');
+
+  currentAcc.movements.push(-amount);
+  receiverAcc.movements.push(amount);
+  updateUi(currentAcc);
 });
 
 // console.log(accounts);
