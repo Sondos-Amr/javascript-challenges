@@ -167,6 +167,16 @@ btnTransfer.addEventListener('click', function (e) {
   receiverAcc.movements.push(amount);
   updateUi(currentAcc);
 });
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (inputCloseUsername.value.trim() !== currentAcc.userName)
+    return alert('your username is false , please enter your true name ');
+  if (inputClosePin.value.trim() === '')
+    return alert('pleace enter your pin .');
+  const index = accounts.findIndex(acc => acc.userName === currentAcc.userName);
+  accounts.splice(index, 1);
+  containerApp.style.opacity = '0';
+});
 
 // console.log(accounts);
 // const calcDisplayMovments = function (movements) {
