@@ -135,6 +135,12 @@ const displatBtnLogin = btnLogin.addEventListener('click', function (e) {
   currentAcc = accounts.find(acc => acc.userName === inputLoginUsername.value);
   e.preventDefault();
   // currentAcc = accounts.find(acc => acc.pin === inputLoginPin.value);
+  const userName = inputLoginUsername.value.trim();
+  const pin = Number(inputLoginPin.value.trim());
+
+  currentAcc = accounts.find(acc => acc.userName === userName);
+  if (!currentAcc)
+    return alert(`not found ${currentAcc.userName.splice(' ')[0]}`);
   if (currentAcc?.pin === Number(inputLoginPin.value)) {
     // display the ui
     containerApp.style.opacity = '1';
@@ -177,6 +183,50 @@ btnClose.addEventListener('click', function (e) {
   accounts.splice(index, 1);
   containerApp.style.opacity = '0';
 });
+
+// FindLast and FindLastIndex
+
+console.log(account1.movements);
+const lastLargeMovment = account1.movements.findLastIndex(acc => acc > 1000);
+const age = account1.movements.length - 1 - lastLargeMovment;
+console.log(`Your latest large movement was ${age} movements ago`);
+
+// inputLoginPin.addEventListener('input', function (e) {
+//   e.preventDefault();
+//   // inputLoginPin.value = '17777711';
+//   const len = inputLoginPin.value.length;
+//   const last = String(inputLoginPin.value).slice(len);
+//   // last.padStart(20, '*');
+//   inputLoginPin.value = last.padStart(len, '*');
+// });
+// inputLoginPin.value = '17777711';
+// const len = inputLoginPin.value.length();
+// const last = inputLoginPin.value.slice(-2);
+// // last.padStart(20, '*');
+// inputLoginPin.value = last.padstart(len, '*');
+
+// let realPin = '';
+
+// inputLoginPin.addEventListener('input', function (e) {
+//   console.log(e);
+//   const newChar = e.data; // The newly typed character
+//   const isDelete = e.inputType === 'deleteContentBackward';
+
+//   if (isDelete) {
+//     realPin = realPin.slice(0, -1); // remove last character
+//   } else if (!isNaN(e.target.value.slice(-1))) {
+//     // Allow only numbers
+//     realPin += e.target.value.slice(-1);
+//   }
+
+//   // Show masked input (last 2 digits visible, rest masked)
+//   const masked =
+//     realPin.length <= 2
+//       ? '*'.repeat(realPin.length)
+//       : '*'.repeat(realPin.length - 2) + realPin.slice(-2);
+
+//   inputLoginPin.value = masked;
+// });
 
 // console.log(accounts);
 // const calcDisplayMovments = function (movements) {
