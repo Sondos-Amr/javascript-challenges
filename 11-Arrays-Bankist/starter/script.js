@@ -216,7 +216,7 @@ btnLoan.addEventListener('click', function (e) {
 
 // Every
 
-console.log(account1.movements.every(mov > 0));
+console.log(account1.movements.every(mov => mov > 0));
 
 // Separate callback
 const deposit = mov => mov > 0;
@@ -224,7 +224,28 @@ console.log(account1.movements.some(deposit));
 console.log(account1.movements.every(deposit));
 console.log(account1.movements.filter(deposit));
 
-// inputLoginPin.addEventListener('input', function (e) {
+// Flat
+const arr = [[1, 2, 3], [4.5], 6, 7];
+console.log(arr.flat());
+
+// deepArr
+const arrDeep = [[1, [2, 3], 4], 5, 6];
+console.log(arrDeep.flat(2));
+
+// get all balance
+const overalBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flatMap
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
+
+// inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
 //   // inputLoginPin.value = '17777711';
 //   const len = inputLoginPin.value.length;
