@@ -192,6 +192,7 @@ const lastLargeMovment = account1.movements.findLastIndex(acc => acc > 1000);
 const age = account1.movements.length - 1 - lastLargeMovment;
 console.log(`Your latest large movement was ${age} movements ago`);
 
+// Some
 // Loan approval condition: deposit ≥ 10% of loan
 
 btnLoan.addEventListener('click', function (e) {
@@ -212,6 +213,16 @@ btnLoan.addEventListener('click', function (e) {
   updateUi(currentAcc);
   inputLoanAmount.value = '';
 });
+
+// Every
+
+console.log(account1.movements.every(mov > 0));
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(account1.movements.some(deposit));
+console.log(account1.movements.every(deposit));
+console.log(account1.movements.filter(deposit));
 
 // inputLoginPin.addEventListener('input', function (e) {
 //   e.preventDefault();
