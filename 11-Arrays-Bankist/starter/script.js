@@ -151,6 +151,7 @@ const displatBtnLogin = btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputTransferAmount.value = inputTransferTo.value = '';
     inputCloseUsername.value = inputClosePin.value = '';
+    inputLoanAmount.value = '';
     inputLoginPin.blur();
     updateUi(currentAcc);
   }
@@ -190,6 +191,27 @@ console.log(account1.movements);
 const lastLargeMovment = account1.movements.findLastIndex(acc => acc > 1000);
 const age = account1.movements.length - 1 - lastLargeMovment;
 console.log(`Your latest large movement was ${age} movements ago`);
+
+// Loan approval condition: deposit ≥ 10% of loan
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value.trim());
+
+  if (!amount) return alert('Please enter the amount of your request.');
+  if (amount <= 0) return alert('Oops! Your amount must be greater than 0.');
+
+  const checkMov = currentAcc.movements.some(bal => bal >= amount / 10);
+  if (!checkMov)
+    return alert(
+      'Loan denied: You need at least one deposit ≥ 10% of the requested loan.'
+    );
+
+  currentAcc.movements.push(amount);
+  updateUi(currentAcc);
+  inputLoanAmount.value = '';
+});
 
 // inputLoginPin.addEventListener('input', function (e) {
 //   e.preventDefault();
