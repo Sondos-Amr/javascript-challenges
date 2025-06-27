@@ -581,3 +581,20 @@ const breeds = [
     activities: ['agility', 'fetch'],
   },
 ];
+
+// task: 1
+
+// case 1 : using forEach();
+const avergeHusky = function (breaks) {
+  breaks.forEach(type => {
+    if (type.breed === 'Husky') return (type.huskyWeight = type.averageWeight);
+  });
+};
+avergeHusky(breeds);
+console.log(breeds);
+
+// case 2: using find();
+
+const husky = breeds.find(breed => breed.breed === 'Husky');
+if (husky) husky.huskyWeight = husky.averageWeight;
+console.log(husky);
