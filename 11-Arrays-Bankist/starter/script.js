@@ -624,3 +624,8 @@ const dogBothActivities = breeds.find(
 // Case 2: Using flatMap (cleaner and simpler)
 const allActivities = breeds.flatMap(bog => bog.activities);
 console.log(allActivities);
+
+// ✅ Task 4: Get unique activities (remove duplicates)
+
+const uniqueActivities = [...new Set(allActivities)];
+console.log(uniqueActivities);
