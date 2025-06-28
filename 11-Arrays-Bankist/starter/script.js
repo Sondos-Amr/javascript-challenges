@@ -598,3 +598,18 @@ console.log(breeds);
 const husky = breeds.find(breed => breed.breed === 'Husky');
 if (husky) husky.huskyWeight = husky.averageWeight;
 console.log(husky);
+
+// ✅ Task 2: Find the breed that likes both "running" and "fetch"
+
+// Case 1: Using find() and saving breed separately
+
+// const dog = breeds.find(
+//   m => m.activities.includes('fetch') && m.activities.includes('running')
+// );
+// const dogBothActivities = dog.breed;
+
+// Case 2: Using optional chaining to access breed directly
+
+const dogBothActivities = breeds.find(
+  m => m.activities.includes('fetch') && m.activities.includes('running')
+)?.breed;
