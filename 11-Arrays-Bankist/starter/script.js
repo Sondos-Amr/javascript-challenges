@@ -640,3 +640,7 @@ const swimmingAdjacent = [
       .filter(activity => activity !== 'swimming')
   ),
 ];
+
+// ✅ Task 6: Check if all breeds have an average weight of 10kg or more
+const allDogsHeavy = breeds.every(bog => bog.averageWeight >= 10);
+console.log(allDogsHeavy);
