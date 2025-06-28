@@ -644,3 +644,8 @@ const swimmingAdjacent = [
 // ✅ Task 6: Check if all breeds have an average weight of 10kg or more
 const allDogsHeavy = breeds.every(bog => bog.averageWeight >= 10);
 console.log(allDogsHeavy);
+
+// ✅ Task 7: Check if any breed has 3 or more activities (considered active)
+
+const hasActiveDogs = breeds.some(bog => bog.activities.length >= 3);
+console.log(hasActiveDogs);
