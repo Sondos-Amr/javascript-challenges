@@ -629,3 +629,14 @@ console.log(allActivities);
 
 const uniqueActivities = [...new Set(allActivities)];
 console.log(uniqueActivities);
+
+// ✅ Task 5: Get unique activities of dogs that like swimming (excluding 'swimming' itself)
+
+const swimmingAdjacent = [
+  ...new Set(
+    breeds
+      .filter(dog => dog.activities.includes('swimming'))
+      .flatMap(active => active.activities)
+      .filter(activity => activity !== 'swimming')
+  ),
+];
