@@ -613,3 +613,14 @@ console.log(husky);
 const dogBothActivities = breeds.find(
   m => m.activities.includes('fetch') && m.activities.includes('running')
 )?.breed;
+
+// ✅ Task 3: Create an array of all activities from all dog breeds
+
+// Case 1: Using map + flat
+
+// const allActivities = breeds.map(bog => bog.activities).flat();
+// console.log(allActivities);
+
+// Case 2: Using flatMap (cleaner and simpler)
+const allActivities = breeds.flatMap(bog => bog.activities);
+console.log(allActivities);
