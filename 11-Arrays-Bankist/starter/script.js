@@ -76,9 +76,8 @@ createUserName(accounts);
 
 const calcDisplayMovments = function (movs, sort = false) {
   containerMovements.innerHTML = '';
-
-  const movments = sort ? movs.slice().sort() : movs;
-  movments.forEach((mov, i) => {
+  const movements = sort ? movs.slice().sort((a, b) => a + b) : movs;
+  movements.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
         <div class="movements__row">
@@ -247,14 +246,27 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance2);
-
-// sort movments
-let sorted = false;
+let sort = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  calcDisplayMovments(currentAcc.movements, !sorted);
-  sorted = !sorted;
+  calcDisplayMovments(currentAcc.movements, !sort);
+  sort = !sort;
 });
+
+// Array Grouping
+console.log(account1.movements);
+const a1 = account1.movements;
+const movsGroup = Object.groupBy(a1, a1 => (a1 > 0 ? 'deposite' : 'withdrals'));
+console.log(movsGroup);
+
+const groupedByActive = Object.groupBy(accounts, acc => {
+  const movementCount = acc.movements.length;
+  if (movementCount >= 8) return 'very active';
+  if (movementCount >= 4) return 'active';
+  if (movementCount >= 1) return 'moderate';
+  return 'inactive';
+});
+console.log(groupedByActive);
 
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
