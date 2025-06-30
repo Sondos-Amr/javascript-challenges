@@ -60,6 +60,7 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+
 // functions
 
 const createUserName = function (accs) {
@@ -73,9 +74,11 @@ const createUserName = function (accs) {
 };
 createUserName(accounts);
 
-const calcDisplayMovments = function (movs) {
+const calcDisplayMovments = function (movs, sort = false) {
   containerMovements.innerHTML = '';
-  movs.forEach((mov, i) => {
+
+  const movments = sort ? movs.slice().sort() : movs;
+  movments.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
         <div class="movements__row">
@@ -244,6 +247,14 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance2);
+
+// sort movments
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  calcDisplayMovments(currentAcc.movements, !sorted);
+  sorted = !sorted;
+});
 
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
@@ -649,3 +660,12 @@ console.log(allDogsHeavy);
 
 const hasActiveDogs = breeds.some(bog => bog.activities.length >= 3);
 console.log(hasActiveDogs);
+
+// BONUS
+
+const a = breeds
+  .filter(bog => bog.activities.includes('fetch'))
+  .reduce((acc, curr) => {
+    return curr.averageWeight > acc.averageWeight ? curr : acc;
+  });
+console.log(a);
