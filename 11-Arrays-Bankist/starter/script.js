@@ -276,6 +276,16 @@ console.log('type', groupedByType);
 const groupedByType2 = Object.groupBy(accounts, ({ type }) => type);
 console.log('type', groupedByType2);
 
+// more ways of creating and fillig arrays;
+const num = new Array(1, 2, 3, 4);
+console.log(num);
+const num2 = new Array(4);
+const fillArr = num2.fill(2, 2, 3);
+console.log(num2);
+console.log(fillArr);
+const fillArr2 = num2.fill(2);
+console.log(fillArr2);
+
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
 //   // inputLoginPin.value = '17777711';
