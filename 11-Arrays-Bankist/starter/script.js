@@ -308,6 +308,31 @@ labelBalance.addEventListener('click', function () {
   const arr5 = arr4.map(ele => Number(ele.textContent.replace('€', '')));
   console.log(arr5);
 });
+
+///////////////////////////////////////////////////////////////
+//  Non-Destructive Alternatives: toReversed, toSorted, toSpliced, with
+console.log('################################');
+const a11 = account1.movements;
+console.log(a11);
+const reverceMovs = a11.reverse();
+console.log(reverceMovs);
+console.log(a11);
+console.log('################################');
+// with slice()
+const a2 = account2.movements;
+console.log(a2);
+const reverceMovs2 = a2.reverse();
+console.log(reverceMovs2);
+console.log(a2);
+console.log('################################');
+// with toReversed()
+const a3 = account3.movements;
+console.log(a3);
+const reverceMovs3 = a3.toReversed();
+console.log(reverceMovs3);
+console.log(a3);
+console.log('################################');
+
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
 //   // inputLoginPin.value = '17777711';
