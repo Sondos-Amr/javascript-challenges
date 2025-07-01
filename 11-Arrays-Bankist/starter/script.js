@@ -294,6 +294,20 @@ const x = Array.from(
 );
 console.log(x);
 
+// nodeList
+// const movsUI = ;
+labelBalance.addEventListener('click', function () {
+  const convertToArr = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(convertToArr);
+  console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+  const arr4 = [...document.querySelectorAll('.movements__value')];
+
+  const arr5 = arr4.map(ele => Number(ele.textContent.replace('€', '')));
+  console.log(arr5);
+});
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
 //   // inputLoginPin.value = '17777711';
