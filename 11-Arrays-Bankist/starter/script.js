@@ -333,6 +333,34 @@ console.log(reverceMovs3);
 console.log(a3);
 console.log('################################');
 
+// toSorted
+// sort() (destructive):
+// const names = ['Sara', 'Ahmed', 'John'];
+// names.sort();
+// console.log(names); // ['Ahmed', 'John', 'Sara']
+// const names = ['Sara', 'Ahmed', 'John'];
+// const sortedNames = names.toSorted();
+
+// console.log(sortedNames); // ['Ahmed', 'John', 'Sara']
+// console.log(names); // ['Sara', 'Ahmed', 'John']
+
+const names = ['Sara', 'Ahmed', 'John'];
+const sortedNames = names.toSorted();
+
+console.log(sortedNames); // ['Ahmed', 'John', 'Sara']
+console.log(names); // ['Sara', 'Ahmed', 'John']
+
+const arr66 = [100, 450, 300];
+arr66[1] = 2000;
+
+console.log(arr66);
+// with()
+
+const arr8 = [100, 450, 300];
+const newArr = arr8.with(1, 2000);
+
+console.log(newArr);
+console.log(arr8);
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
 //   // inputLoginPin.value = '17777711';
