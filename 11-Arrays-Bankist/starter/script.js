@@ -774,3 +774,19 @@ const a = breeds
     return curr.averageWeight > acc.averageWeight ? curr : acc;
   });
 console.log(a);
+
+////////////////////////////
+// Array method practice
+
+// // get total of mony in the bank
+// labelWelcome.addEventListener('click', function () {
+//   const allBalances = accounts.map(acc => acc.balance);
+//   //  .reduce((acc, ele) => acc + ele.balance, 0);
+//   console.log(allBalances);
+// });
+
+const allBalances = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(allBalances);
