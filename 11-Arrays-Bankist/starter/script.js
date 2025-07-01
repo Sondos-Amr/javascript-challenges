@@ -286,6 +286,14 @@ console.log(fillArr);
 const fillArr2 = num2.fill(2);
 console.log(fillArr2);
 
+const y = Array.from({ length: 10 }, () => 1);
+console.log(y);
+const x = Array.from(
+  { length: 100 },
+  (_, i) => Math.floor(Math.random() * 100) + 1
+);
+console.log(x);
+
 // inputLoginPinaddEventListener('input', function (e) {
 //   e.preventDefault();
 //   // inputLoginPin.value = '17777711';
