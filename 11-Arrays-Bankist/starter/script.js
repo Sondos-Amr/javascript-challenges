@@ -780,13 +780,21 @@ console.log(a);
 
 // // get total of mony in the bank
 // labelWelcome.addEventListener('click', function () {
-//   const allBalances = accounts.map(acc => acc.balance);
+//   const bankDepositSum  = accounts.map(acc => acc.balance);
 //   //  .reduce((acc, ele) => acc + ele.balance, 0);
-//   console.log(allBalances);
+//   console.log(bankDepositSum );
 // });
 
-const allBalances = accounts
+// 1.
+const bankDepositSum = accounts
   .flatMap(acc => acc.movements)
   .filter(mov => mov > 0)
   .reduce((acc, mov) => acc + mov, 0);
-console.log(allBalances);
+console.log(bankDepositSum);
+
+//2.
+
+const numDeposit1000 = accounts
+  .flatMap(ele => ele.movements)
+  .filter(ele => ele >= 1000).length;
+console.log(numDeposit1000);
