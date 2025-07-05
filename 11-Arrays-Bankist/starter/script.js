@@ -794,7 +794,14 @@ console.log(bankDepositSum);
 
 //2.
 
+// case 1
+// const numDeposit1000 = accounts
+//   .flatMap(ele => ele.movements)
+//   .filter(ele => ele >= 1000).length;
+// console.log(numDeposit1000);
+
+// case
+
 const numDeposit1000 = accounts
   .flatMap(ele => ele.movements)
-  .filter(ele => ele >= 1000).length;
-console.log(numDeposit1000);
+  .reduce((count, curr) => (curr >= 1000 ? ++count : count), 0);
