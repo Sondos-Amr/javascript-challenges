@@ -822,3 +822,15 @@ const { deposits, withdrawals } = accounts
     { deposits: 0, withdrawals: 0 }
   );
 console.log(deposits, withdrawals);
+
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums[0] += cur) : (sums[1] += cur);
+      sums[cur > 0 ? 0 : 1] += cur;
+      return sums;
+    },
+    [0, 0]
+  );
+console.log(sums);
