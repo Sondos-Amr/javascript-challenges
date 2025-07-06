@@ -911,3 +911,24 @@ const dogs = [
   { weight: 18, curFood: 244, owners: ['Joe'] },
   { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
+
+console.log(
+  'Challenge 5 in section 11 ##############################################'
+);
+
+// 1.
+// const calcRecFood = dogs => {
+//   dogs.forEach(dog => {
+//     const recommended = dog.weight ** 0.75 * 28;
+//     dog.recFood = Number((recommended / 1000).toFixed(2));
+//   });
+// };
+
+// calcRecFood(dogs);
+// console.log(dogs);
+const calcRecFood = dogs => {
+  dogs.forEach(dog => (dog.recFood = Math.floor(dog.weight ** 0.75 * 28)));
+};
+
+calcRecFood(dogs);
+console.log(dogs);
