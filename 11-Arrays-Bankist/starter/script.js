@@ -936,9 +936,22 @@ console.log(dogs);
 // 2.
 const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
 console.log(sarahDog);
-const v = sarahDog
+const sarahDogFeedingStatus = sarahDog
   ? sarahDog.curFood > sarahDog.recFood
     ? "Sarah's dog eats too much"
     : "Sarah's dog eats too little"
   : "Sarah's dog not found.";
-console.log(v);
+console.log(sarahDogFeedingStatus);
+
+// 3.
+// case 1
+let d1 = [];
+let d2 = [];
+const s = dogs.forEach(dog => {
+  if (dog.curFood > dog.recFood) return d1.push(dog.owners);
+  if (dog.curFood < dog.recFood) return d2.push(dog.owners);
+  if (dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1)
+    return console.log('ok', dog.owners);
+});
+console.log('big', d1.flat());
+console.log('small', d2.flat());
