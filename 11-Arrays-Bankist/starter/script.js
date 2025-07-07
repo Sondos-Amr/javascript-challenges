@@ -964,5 +964,41 @@ const ownersEatTooMuch = dogs
 const ownersEatTooLittle = dogs
   .filter(dog => dog.curFood < dog.recFood * 0.9)
   .flatMap(dog => dog.owners);
-console.log(`too much ${ownersEatTooMuch}`);
-console.log(`too little ${ownersEatTooLittle}`);
+console.log('too much', ownersEatTooMuch);
+console.log('too little', ownersEatTooLittle);
+
+// Case 3
+const feedingGroups = dogs.reduce(
+  (acc, ele) => {
+    if (ele.curFood > ele.recFood * 1.1) {
+      acc.tooMush.push(...ele.owners);
+    } else if (ele.curFood < ele.recFood * 0.9) {
+      acc.tooLittle.push(...ele.owners);
+    }
+    return acc;
+  },
+  {
+    tooMush: [],
+    tooLittle: [],
+  }
+);
+console.log('owners Much ', feedingGroups.tooMush);
+console.log('owners Litter', feedingGroups.tooLittle);
+
+// with destrcturing
+const { tooMush, tooLittle } = dogs.reduce(
+  (acc, ele) => {
+    if (ele.curFood > ele.recFood * 1.1) {
+      acc.tooMush.push(...ele.owners);
+    } else if (ele.curFood < ele.recFood * 0.9) {
+      acc.tooLittle.push(...ele.owners);
+    }
+    return acc;
+  },
+  {
+    tooMush: [],
+    tooLittle: [],
+  }
+);
+console.log('owners Much ', tooMush);
+console.log('owners Litter', tooLittle);
