@@ -932,3 +932,13 @@ const calcRecFood = dogs => {
 
 calcRecFood(dogs);
 console.log(dogs);
+
+// 2.
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(sarahDog);
+const v = sarahDog
+  ? sarahDog.curFood > sarahDog.recFood
+    ? "Sarah's dog eats too much"
+    : "Sarah's dog eats too little"
+  : "Sarah's dog not found.";
+console.log(v);
