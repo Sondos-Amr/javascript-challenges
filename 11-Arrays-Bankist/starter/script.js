@@ -955,3 +955,14 @@ const s = dogs.forEach(dog => {
 });
 console.log('big', d1.flat());
 console.log('small', d2.flat());
+
+// Case 2
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood * 1.1)
+  .flatMap(dog => dog.owners);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood * 0.9)
+  .flatMap(dog => dog.owners);
+console.log(`too much ${ownersEatTooMuch}`);
+console.log(`too little ${ownersEatTooLittle}`);
