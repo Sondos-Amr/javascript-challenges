@@ -1020,3 +1020,8 @@ const getDogOwnersByFood = function (...dog) {
   addOwnerText(little);
 };
 getDogOwnersByFood(tooMush, tooLittle);
+
+// Case 2
+console.log(`${tooMush.join(' and ')}'s dogs eat too much!`);
+
+console.log(`${tooLittle.join('and')}'s dogs eat too little!`);
