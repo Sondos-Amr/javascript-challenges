@@ -1030,3 +1030,9 @@ console.log(`${tooLittle.join('and')}'s dogs eat too little!`);
 
 const isAnyDogEatingExactly = dogs.some(dog => dog.curFood === dog.recFood);
 console.log(isAnyDogEatingExactly);
+
+// 6.
+const isAnyDogEatingOkay = dogs.every(
+  dog => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9
+);
+console.log(isAnyDogEatingOkay);
