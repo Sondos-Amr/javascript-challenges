@@ -1058,19 +1058,31 @@ console.log('Dogs eating okay:', dogsEatingOk);
 
 // 8.
 // Case 1
-const { exactG, tooMuchG, tooLittleG } = dogs.reduce(
+const { exact, too_Much, too_Little } = dogs.reduce(
   (acc, dog) => {
     if (dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1) {
-      acc.exactG.push(dog);
+      acc.exact.push(dog);
     } else if (dog.curFood < dog.recFood) {
-      acc.tooLittleG.push(dog);
+      acc.too_Little.push(dog);
     } else {
-      acc.tooMuchG.push(dog);
+      acc.too_Much.push(dog);
     }
     return acc;
   },
-  { exactG: [], tooMuchG: [], tooLittleG: [] }
+  { exact: [], too_Much: [], too_Little: [] }
 );
-console.log(exactG);
-console.log(tooLittleG);
-console.log(tooMuchG);
+console.log(exact);
+console.log(too_Little);
+console.log(too_Much);
+
+// Case 2
+const { okDogs, underfedDogs, overfedDogs } = Object.groupBy(dogs, dog => {
+  if (dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1) {
+    return 'okDogs';
+  } else if (dog.curFood < dog.recFood) {
+    return 'underfedDogs';
+  } else {
+    return 'overfedDogs';
+  }
+});
+console.log(okDogs, underfedDogs, overfedDogs);
