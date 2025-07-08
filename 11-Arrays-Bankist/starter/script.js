@@ -1031,8 +1031,26 @@ console.log(`${tooLittle.join('and')}'s dogs eat too little!`);
 const isAnyDogEatingExactly = dogs.some(dog => dog.curFood === dog.recFood);
 console.log(isAnyDogEatingExactly);
 
+// // 6.
+// const isEatingOk = dogs.every(
+//   dog => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9
+// );
+// console.log(isEatingOk);
+
+// // 7.
+// const dogsEatingOk = dogs.filter(
+//   dog => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9
+// );
+// console.log('dogs eating ok', dogsEatingOk);
+
+// Case 2 for Task 6 & 7
+const isEatingOk = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+
 // 6.
-const isAnyDogEatingOkay = dogs.every(
-  dog => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9
-);
-console.log(isAnyDogEatingOkay);
+const checkEatingOk = dogs.every(isEatingOk);
+console.log('All dogs eating okay:', checkEatingOk);
+
+// 7.
+const dogsEatingOk = dogs.filter(isEatingOk);
+console.log('Dogs eating okay:', dogsEatingOk);
