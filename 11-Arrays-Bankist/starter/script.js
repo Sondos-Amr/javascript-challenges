@@ -934,14 +934,14 @@ calcRecFood(dogs);
 console.log(dogs);
 
 // 2.
-const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
-console.log(sarahDog);
-const sarahDogFeedingStatus = sarahDog
-  ? sarahDog.curFood > sarahDog.recFood
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(dogSarah);
+const dogSarahFeedingStatus = dogSarah
+  ? dogSarah.curFood > dogSarah.recFood
     ? "Sarah's dog eats too much"
     : "Sarah's dog eats too little"
   : "Sarah's dog not found.";
-console.log(sarahDogFeedingStatus);
+console.log(dogSarahFeedingStatus);
 
 // 3.
 // case 1
@@ -1002,3 +1002,21 @@ const { tooMush, tooLittle } = dogs.reduce(
 );
 console.log('owners Much ', tooMush);
 console.log('owners Litter', tooLittle);
+
+// 4.
+// Case 1
+const getDogOwnersByFood = function (...dog) {
+  const [much, little] = dog;
+  const addOwnerText = owners => {
+    console.log(
+      owners.join(' and ') +
+        (owners.length === much.length
+          ? "'s dogs eat too much!"
+          : "'s dogs eat too little!")
+    );
+  };
+
+  addOwnerText(much);
+  addOwnerText(little);
+};
+getDogOwnersByFood(tooMush, tooLittle);
