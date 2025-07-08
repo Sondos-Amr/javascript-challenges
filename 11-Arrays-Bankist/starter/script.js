@@ -1025,3 +1025,8 @@ getDogOwnersByFood(tooMush, tooLittle);
 console.log(`${tooMush.join(' and ')}'s dogs eat too much!`);
 
 console.log(`${tooLittle.join('and')}'s dogs eat too little!`);
+
+// 5.
+
+const isAnyDogEatingExactly = dogs.some(dog => dog.curFood === dog.recFood);
+console.log(isAnyDogEatingExactly);
