@@ -1258,3 +1258,7 @@ console.log(swimmingAdjacent2);
 // 6.
 const allAbove10 = breeds2.every(dog => dog.averageWeight >= 10);
 console.log(allAbove10);
+
+// 7.
+const hasActive = breeds2.some(b => b.activities.length >= 3);
+console.log(hasActive);
