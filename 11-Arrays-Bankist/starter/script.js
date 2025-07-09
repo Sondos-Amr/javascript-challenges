@@ -1090,3 +1090,7 @@ console.log(okDogs, underfedDogs, overfedDogs);
 // 9.
 const dogsGroupedByOwnersCount = Object.groupBy(dogs, dog => dog.owners.length);
 console.log(dogsGroupedByOwnersCount);
+
+// 10.
+const dogsSorted = dogs.toSorted((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
