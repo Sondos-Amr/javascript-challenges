@@ -1239,3 +1239,7 @@ console.log(dogBothActivities2);
 // 3.
 const allActivities2 = breeds2.flatMap(b => b.activities);
 console.log(allActivities2);
+
+// 4.
+const uniqueActivities2 = [...new Set(allActivities2)];
+console.log(uniqueActivities2);
