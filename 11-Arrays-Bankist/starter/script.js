@@ -1254,3 +1254,7 @@ const swimmingAdjacent2 = [
   ),
 ];
 console.log(swimmingAdjacent2);
+
+// 6.
+const allAbove10 = breeds2.every(dog => dog.averageWeight >= 10);
+console.log(allAbove10);
