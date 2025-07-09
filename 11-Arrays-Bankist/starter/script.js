@@ -1086,3 +1086,7 @@ const { okDogs, underfedDogs, overfedDogs } = Object.groupBy(dogs, dog => {
   }
 });
 console.log(okDogs, underfedDogs, overfedDogs);
+
+// 9.
+const dogsGroupedByOwnersCount = Object.groupBy(dogs, dog => dog.owners.length);
+console.log(dogsGroupedByOwnersCount);
