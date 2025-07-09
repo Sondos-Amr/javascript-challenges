@@ -1262,3 +1262,10 @@ console.log(allAbove10);
 // 7.
 const hasActive = breeds2.some(b => b.activities.length >= 3);
 console.log(hasActive);
+
+// 8.
+const fetchWeights = breeds2
+  .filter(b => b.activities.includes('fetch'))
+  .map(b => b.averageWeight);
+const heaviestFetchWeight = Math.max(...fetchWeights);
+console.log(heaviestFetchWeight);
