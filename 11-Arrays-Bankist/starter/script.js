@@ -1243,3 +1243,14 @@ console.log(allActivities2);
 // 4.
 const uniqueActivities2 = [...new Set(allActivities2)];
 console.log(uniqueActivities2);
+
+// 5.
+const swimmingAdjacent2 = [
+  ...new Set(
+    breeds2
+      .filter(b => b.activities.includes('swimming'))
+      .flatMap(ac => ac.activities)
+      .filter(ac => ac !== 'swimming')
+  ),
+];
+console.log(swimmingAdjacent2);
