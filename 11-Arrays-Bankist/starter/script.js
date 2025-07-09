@@ -1235,3 +1235,7 @@ const dogBothActivities2 = breeds2.find(
   dog => dog.activities.includes('running') && dog.activities.includes('fetch')
 ).breed;
 console.log(dogBothActivities2);
+
+// 3.
+const allActivities2 = breeds2.flatMap(b => b.activities);
+console.log(allActivities2);
