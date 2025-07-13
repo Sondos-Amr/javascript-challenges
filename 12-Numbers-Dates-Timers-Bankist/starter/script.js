@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -223,7 +223,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -251,3 +251,37 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+// Session 1
+// convert numbers
+// conversion
+console.log(Number('25'));
+console.log(+'4');
+
+// parsing
+console.log(Number.parseInt('80px'));
+console.log(Number.parseInt('p80'));
+
+console.log(Number.parseFloat('2.5rem'));
+console.log(Number.parseInt('2.5rem'));
+
+// global function  - u can writte without Function Of Number like this :
+console.log(parseFloat('2.5rem'));
+console.log(parseInt('2rem'));
+
+// NaN
+console.log(Number.isNaN('4'));
+console.log(Number.isNaN(4));
+console.log('####');
+console.log(Number.isNaN(+'4rem'));
+console.log(Number.isNaN(23 / 0));
+
+console.log('######');
+console.log(Number.isFinite(20));
+console.log(Number.isFinite('20'));
+
+console.log('######');
+console.log(Number.isInteger(23));
+console.log(Number.isInteger(23.5));
+console.log(Number.isInteger(+'23'));
+console.log(Number.isInteger(+'23r'));

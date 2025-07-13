@@ -181,6 +181,8 @@ const bookEW23 = book.bind(eurowings, 23);
 bookEW23('Jonas Schmedtmann');
 bookEW23('Martha Cooper');
 
+
+
 // With Event Listeners
 lufthansa.planes = 300;
 lufthansa.buyPlane = function () {
@@ -407,3 +409,24 @@ GOOD LUCK 😀
   });
 })();
 */
+
+const book = function (flightNum, name) {
+  console.log(
+    `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+  );
+  this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+};
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+// book.apply(eurowings, [23, 'Steven Williams']);
+
+const bookEW = book.bind(eurowings, 80);
+// book.bind(eurowings, 23, 'Steven Williams');
+bookEW('LOFEY');
+bookEW('asmaa');
+// bookEW();
