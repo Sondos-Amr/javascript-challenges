@@ -285,3 +285,32 @@ console.log(Number.isInteger(23));
 console.log(Number.isInteger(23.5));
 console.log(Number.isInteger(+'23'));
 console.log(Number.isInteger(+'23r'));
+
+// Session 2
+// Math & Rounding
+
+console.log(Math.trunc(Math.random() * 2) + 1);
+const randomInt = (min, max) =>
+  Math.trunc(Math.random() * (max - min + 1)) + min;
+console.log(randomInt(10, 20));
+
+// Rounding Integers
+const getRandomBetween = (min, max) => {
+  return Math.trunc(Math.random() * (max - min + 1)) + min;
+};
+console.log(getRandomBetween(5, 10));
+// case 1
+const diceRoll = Math.trunc(Math.random() * 6 + 1);
+console.log(diceRoll);
+// case 2
+const arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+const diceRoll2 = Math.trunc(Math.random() * arr.length);
+console.log(diceRoll2);
+
+// Rounding decimals
+console.log((2.7).toFixed(0));
+console.log((2.795).toFixed(2));
+console.log((2.739).toFixed(2));
+
+//  NOTE : The toFixed method returns a string, so you can use type coercion like this:
+console.log(+(2.739).toFixed(2));
