@@ -329,3 +329,9 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'yellow';
   });
 });
+
+// Session 4 - Numeric Separators
+const num = 50_00.5;
+const num2 = 50_00_00;
+console.log(num);
+console.log(num2);
