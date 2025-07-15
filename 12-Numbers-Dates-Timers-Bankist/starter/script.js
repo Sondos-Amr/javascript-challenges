@@ -335,3 +335,9 @@ const num = 50_00.5;
 const num2 = 50_00_00;
 console.log(num);
 console.log(num2);
+
+// Session 5 - BigInt
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(945474725456768765456468);
+console.log(945474725456768765456468n);
+console.log(BigInt(945474725456768765456468));
