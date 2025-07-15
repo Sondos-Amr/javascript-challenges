@@ -314,3 +314,18 @@ console.log((2.739).toFixed(2));
 
 //  NOTE : The toFixed method returns a string, so you can use type coercion like this:
 console.log(+(2.739).toFixed(2));
+
+// Session 3 - Reminder Operator
+
+const isEven = num => num % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2 === 0) row.style.backgroundColor = 'blue';
+    // if (i % 2 !== 0) row.style.backgroundColor = 'yellow';
+    if (i % 3 === 0) row.style.backgroundColor = 'yellow';
+  });
+});
