@@ -341,3 +341,12 @@ console.log(Number.MAX_SAFE_INTEGER);
 console.log(945474725456768765456468);
 console.log(945474725456768765456468n);
 console.log(BigInt(945474725456768765456468));
+
+////////////////////// Dates & Times
+// Session 6 - Creating Dates
+const now = new Date();
+console.log(now);
+console.log(now.getFullYear());
+console.log(now.getMonth());
+console.log(now.getDay());
+console.log(now.toISOString());
