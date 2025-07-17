@@ -155,6 +155,17 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+const now = new Date();
+const day = `${now.getDate()}`.padStart(2, '0');
+// const month =
+//   now.getMonth() + 1 <= 9 ? `0${now.getMonth() + 1}` : now.getMonth() + 1;
+const month = `${now.getMonth() + 1}`.padStart(2, '0');
+const year = now.getFullYear();
+const hour = now.getHours();
+const min = now.getMinutes();
+
+labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -344,9 +355,9 @@ console.log(BigInt(945474725456768765456468));
 
 ////////////////////// Dates & Times
 // Session 6 - Creating Dates
-const now = new Date();
-console.log(now);
-console.log(now.getFullYear());
-console.log(now.getMonth());
-console.log(now.getDay());
-console.log(now.toISOString());
+// const now = new Date();
+// console.log(now);
+// console.log(now.getFullYear());
+// console.log(now.getMonth());
+// console.log(now.getDay());
+// console.log(now.toISOString());
