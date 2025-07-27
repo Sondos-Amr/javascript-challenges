@@ -382,3 +382,10 @@ console.log(BigInt(945474725456768765456468));
 // console.log(now.getMonth());
 // console.log(now.getDay());
 // console.log(now.toISOString());
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(+future);
+const calcDays = (date1, date2) =>
+  Math.abs((date2 - date1) / (1000 * 60 * 60 * 24));
+const day1 = calcDays(new Date(2037, 3, 4), new Date(2037, 3, 14));
+console.log(day1);
