@@ -84,19 +84,24 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort
-    ? acc.movements.slice().sort((a, b) => a - b)
-    : acc.movements;
+  const combinedMovsDate = acc.movements.map((mov, i) => {
+    return {
+      movement: mov,
+      movementsDates: acc.movementsDates.at(i),
+    };
+  });
+  if (sort) combinedMovsDate.sort((a, b) => a.movement - b.movement);
 
-  movs.forEach(function (mov, i) {
-    const date = new Date(acc.movementsDates[i]);
+  combinedMovsDate.forEach((obj, i) => {
+    const { movement, movementsDates } = obj;
+    const date = new Date(movementsDates);
     const day = `${date.getDate()}`.padStart(2, '0');
     const month = `${date.getMonth() + 1}`.padStart(2, '0');
     const year = date.getFullYear();
 
     const displayDate = `${day}/${month}/${year}`;
 
-    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const type = movement > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
       <div class="movements__row">
@@ -106,7 +111,7 @@ const displayMovements = function (acc, sort = false) {
               <div class="movements__date">${displayDate}</div>
 
     
-        <div class="movements__value">${mov.toFixed(2)}€</div>
+        <div class="movements__value">${movement.toFixed(2)}€</div>
       </div>
     `;
 
@@ -167,16 +172,6 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
-const now = new Date();
-const day = `${now.getDate()}`.padStart(2, '0');
-// const month = now.getMonth() + 1 <= 9 ? `0${now.getMonth() + 1}` : now.getMonth() + 1;
-const month = `${now.getMonth() + 1}`.padStart(2, '0');
-const year = now.getFullYear();
-const hour = `now.getHours()`.padStart(2, '0');
-const min = `now.getMinutes()`.padStart(2, '0');
-
-labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
-
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -191,7 +186,18 @@ btnLogin.addEventListener('click', function (e) {
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
+
     containerApp.style.opacity = 100;
+
+    const now = new Date();
+    const day = `${now.getDate()}`.padStart(2, '0');
+    // const month = now.getMonth() + 1 <= 9 ? `0${now.getMonth() + 1}` : now.getMonth() + 1;
+    const month = `${now.getMonth() + 1}`.padStart(2, '0');
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, '0');
+    const min = `${now.getMinutes()}`.padStart(2, '0');
+
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
