@@ -80,7 +80,23 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
+const formatMovementDate = function (date) {
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+  const disPassed = calcDaysPassed(new Date(), date);
+  if (disPassed === 0) return 'Today';
+  if (disPassed === 1) return 'Yesterday';
+  if (disPassed <= 7) return `${disPassed} days ago`;
+  else {
+    const day = `${date.getDate()}`.padStart(2, '0');
 
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+};
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -95,11 +111,7 @@ const displayMovements = function (acc, sort = false) {
   combinedMovsDate.forEach((obj, i) => {
     const { movement, movementsDates } = obj;
     const date = new Date(movementsDates);
-    const day = `${date.getDate()}`.padStart(2, '0');
-    const month = `${date.getMonth() + 1}`.padStart(2, '0');
-    const year = date.getFullYear();
-
-    const displayDate = `${day}/${month}/${year}`;
+    const displayDate = formatMovementDate(date);
 
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
