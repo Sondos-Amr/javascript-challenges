@@ -115,7 +115,10 @@ const displayMovements = function (acc, sort = false) {
     const displayDate = formatMovementDate(date, acc.local);
 
     const type = movement > 0 ? 'deposit' : 'withdrawal';
-
+    const formattedMov = new Intl.NumberFormat(acc.local, {
+      style: 'currency',
+      currency: acc.currency,
+    }).format(movement);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
@@ -124,7 +127,7 @@ const displayMovements = function (acc, sort = false) {
               <div class="movements__date">${displayDate}</div>
 
     
-        <div class="movements__value">${movement.toFixed(2)}€</div>
+        <div class="movements__value">${formattedMov}</div>
       </div>
     `;
 
@@ -423,3 +426,25 @@ const calcDays = (date1, date2) =>
   Math.abs((date2 - date1) / (1000 * 60 * 60 * 24));
 const day1 = calcDays(new Date(2037, 3, 4), new Date(2037, 3, 14));
 console.log(day1);
+
+////////////////////////////////////////
+///////////////////////////////////////
+
+const nums = 3884764.23;
+
+const options = {
+  style: 'percent',
+  unit: 'celsius',
+  currency: 'EUR',
+  useGrouping: false,
+};
+console.log('us', new Intl.NumberFormat('en', options).format(nums));
+
+console.log('egypt', new Intl.NumberFormat('ar-SY', options).format(nums));
+
+console.log('germany', new Intl.NumberFormat('de-De', options).format(nums));
+
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(nums)
+);
