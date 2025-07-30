@@ -215,6 +215,24 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  // labelTimer.textContent = `${hour}:${minute}`;
+  let time = 10;
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${sec}`;
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+    time--;
+  };
+  tick();
+  const timer = setInterval(tick, 1000);
+};
+
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
@@ -271,6 +289,7 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    startLogOutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -496,3 +515,11 @@ const pizzaTimer = setTimeout(
 );
 console.log('Waiting...');
 if (ingredients.includes('olives')) clearTimeout(pizzaTimer);
+
+// setInterval(() => {
+//   const now = new Date();
+//   const hour = now.getHours();
+//   const minute = now.getMinutes();
+//   const second = now.getSeconds();
+//   console.log(`${hour}/${minute}/${second}`);
+// }, 3000);
