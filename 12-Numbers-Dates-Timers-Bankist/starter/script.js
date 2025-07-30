@@ -98,6 +98,14 @@ const formatMovementDate = function (date, local) {
     return Intl.DateTimeFormat(local).format(date);
   }
 };
+
+const formatCur = function (currency, local, value) {
+  const option = {
+    style: 'currency',
+    currency: currency,
+  };
+  return Intl.NumberFormat(local, option).format(value);
+};
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -115,10 +123,10 @@ const displayMovements = function (acc, sort = false) {
     const displayDate = formatMovementDate(date, acc.local);
 
     const type = movement > 0 ? 'deposit' : 'withdrawal';
-    const formattedMov = new Intl.NumberFormat(acc.local, {
-      style: 'currency',
-      currency: acc.currency,
-    }).format(movement);
+    // const formattedMov = new Intl.NumberFormat(acc.local, {
+    //   style: 'currency',
+    //   currency: acc.currency,
+    // }).format(movement);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
@@ -127,7 +135,11 @@ const displayMovements = function (acc, sort = false) {
               <div class="movements__date">${displayDate}</div>
 
     
-        <div class="movements__value">${formattedMov}</div>
+        <div class="movements__value">${formatCur(
+          acc.currency,
+          acc.local,
+          movement
+        )}</div>
       </div>
     `;
 
@@ -137,19 +149,34 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  // const option = {
+  //   style: 'currency',
+  //   currency: acc.currency,
+  // };
+  // const formattedBalance = Intl.NumberFormat(acc.local, option).format(
+  //   acc.balance
+  // );
+  labelBalance.textContent = `${formatCur(
+    acc.currency,
+    acc.local,
+    acc.balance
+  )}`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatCur(acc.currency, acc.local, incomes)}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out.toFixed(2))}€`;
+  labelSumOut.textContent = `${formatCur(
+    acc.currency,
+    acc.local,
+    Math.abs(out)
+  )}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -159,7 +186,11 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${formatCur(
+    acc.currency,
+    acc.local,
+    interest
+  )}`;
 };
 
 const createUsernames = function (accs) {
