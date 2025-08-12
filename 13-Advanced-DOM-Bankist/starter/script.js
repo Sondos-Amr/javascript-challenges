@@ -58,3 +58,16 @@ const btnCloseCookie = document.querySelector('.btn--close-cookie');
 btnCloseCookie.addEventListener('click', function () {
   message.remove();
 });
+
+/// Style
+
+message.style.backgroundColor = '#37383d';
+
+console.log(message.style.color);
+console.log(getComputedStyle(message));
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
