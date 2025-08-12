@@ -71,3 +71,13 @@ message.style.height =
 
 document.documentElement.style.setProperty('--color-primary', 'orangered');
 
+// scroll
+const section1 = document.querySelector('#section--1');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+
+btnScrollTo.addEventListener('click', function () {
+  section1.scrollIntoView({
+    behavior: 'smooth',
+  });
+});
