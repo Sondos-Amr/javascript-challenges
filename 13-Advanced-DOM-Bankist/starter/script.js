@@ -81,3 +81,15 @@ btnScrollTo.addEventListener('click', function () {
     behavior: 'smooth',
   });
 });
+
+const h1 = document.querySelector('h1');
+// h1.addEventListener('mouseenter', function () {
+//   alert('test');
+// });
+
+// h1.onmouseenter = function () {
+//   alert('test');
+// };
+h1.onclick = function () {
+  alert('test');
+};
