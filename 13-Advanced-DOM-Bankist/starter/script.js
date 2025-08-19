@@ -96,38 +96,53 @@ h1.onclick = function () {
 
 //// Event Propagation in Practice
 
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1)) + min;
 
-const randomColor = (min, max) =>
-  `rgb(${randomInt(min, max)} , ${randomInt(min, max)} , ${randomInt(
-    min,
-    max
-  )})`;
+// const randomColor = (min, max) =>
+//   `rgb(${randomInt(min, max)} , ${randomInt(min, max)} , ${randomInt(
+//     min,
+//     max
+//   )})`;
 
-console.log(randomColor(0, 255));
+// console.log(randomColor(0, 255));
 
-const navLink = document.querySelector('.nav__link');
-navLink.addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor(0, 255);
-  console.log(` navLink ${e.target} : curr ${e.currentTarget}`);
-  e.stopPropagation();
+// const navLink = document.querySelector('.nav__link');
+// navLink.addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor(0, 255);
+//   console.log(` navLink ${e.target} : curr ${e.currentTarget}`);
+//   e.stopPropagation();
+// });
+
+// const navLinks = document.querySelector('.nav__links');
+// navLinks.addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor(0, 255);
+//   console.log(`navLinks ${e.target} : curr ${e.currentTarget}`);
+// });
+
+// const nav = document.querySelector('.nav');
+// nav.addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor(0, 255);
+
+//     console.log(`nav ${e.target} : curr ${e.currentTarget}`);
+//     console.log(e.currentTarget === this);
+//   },
+//   true
+// );
+
+////////////////////
+// Page navigation
+
+// Case 1
+const navLinks2 = document.querySelectorAll('.nav__link');
+navLinks2.forEach(el => {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    const id = this.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  });
 });
-
-const navLinks = document.querySelector('.nav__links');
-navLinks.addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor(0, 255);
-  console.log(`navLinks ${e.target} : curr ${e.currentTarget}`);
-});
-
-const nav = document.querySelector('.nav');
-nav.addEventListener(
-  'click',
-  function (e) {
-    this.style.backgroundColor = randomColor(0, 255);
-
-    console.log(`nav ${e.target} : curr ${e.currentTarget}`);
-    console.log(e.currentTarget === this);
-  },
-  true
-);
