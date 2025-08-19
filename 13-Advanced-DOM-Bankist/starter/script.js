@@ -136,13 +136,26 @@ h1.onclick = function () {
 // Page navigation
 
 // Case 1
-const navLinks2 = document.querySelectorAll('.nav__link');
-navLinks2.forEach(el => {
-  el.addEventListener('click', function (e) {
-    e.preventDefault();
-    const id = this.getAttribute('href');
+// const navLinks2 = document.querySelectorAll('.nav__link');
+// navLinks2.forEach(el => {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth',
+//     });
+//   });
+// });
+
+// Case 2
+const navLinks = document.querySelector('.nav__links');
+
+navLinks.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({
       behavior: 'smooth',
     });
-  });
+  }
 });
