@@ -159,3 +159,35 @@ navLinks.addEventListener('click', function (e) {
     });
   }
 });
+
+// Dom Traversing:
+
+// Going downwards: child
+console.log(
+  [...h1.querySelectorAll('.highlight')].forEach((ele, i) => {
+    ele.style.backgroundColor = 'red';
+  })
+);
+console.log(h1.childNodes);
+console.log(h1.children);
+
+h1.firstElementChild.style.color = 'blue';
+h1.lastElementChild.style.color = 'gray';
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.backgroundColor = 'yellow';
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(ele => {
+  if (ele !== h1) ele.style.transform = 'scale(0.5)';
+});
