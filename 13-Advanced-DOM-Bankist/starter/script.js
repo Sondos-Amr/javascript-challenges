@@ -8,6 +8,11 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const header = document.querySelector('.header');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
+const navLinks = document.querySelector('.nav__links');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -63,8 +68,8 @@ btnCloseCookie.addEventListener('click', function () {
 
 message.style.backgroundColor = '#37383d';
 
-console.log(message.style.color);
-console.log(getComputedStyle(message));
+// console.log(message.style.color);
+// console.log(getComputedStyle(message));
 
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height) + 30 + 'px';
@@ -148,7 +153,6 @@ h1.onclick = function () {
 // });
 
 // Case 2
-const navLinks = document.querySelector('.nav__links');
 
 navLinks.addEventListener('click', function (e) {
   e.preventDefault();
@@ -160,34 +164,112 @@ navLinks.addEventListener('click', function (e) {
   }
 });
 
-// Dom Traversing:
+// // Dom Traversing:
 
-// Going downwards: child
-console.log(
-  [...h1.querySelectorAll('.highlight')].forEach((ele, i) => {
-    ele.style.backgroundColor = 'red';
-  })
-);
-console.log(h1.childNodes);
-console.log(h1.children);
+// // Going downwards: child
+// console.log(
+//   [...h1.querySelectorAll('.highlight')].forEach((ele, i) => {
+//     ele.style.backgroundColor = 'red';
+//   })
+// );
+// console.log(h1.childNodes);
+// console.log(h1.children);
 
-h1.firstElementChild.style.color = 'blue';
-h1.lastElementChild.style.color = 'gray';
+// h1.firstElementChild.style.color = 'blue';
+// h1.lastElementChild.style.color = 'gray';
 
-// Going upwards: parents
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// // Going upwards: parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
-h1.closest('.header').style.backgroundColor = 'yellow';
+// h1.closest('.header').style.backgroundColor = 'yellow';
 
-// Going sideways: siblings
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+// // Going sideways: siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
 
-console.log(h1.parentElement.children);
-[...h1.parentElement.children].forEach(ele => {
-  if (ele !== h1) ele.style.transform = 'scale(0.5)';
+// console.log(h1.parentElement.children);
+// [...h1.parentElement.children].forEach(ele => {
+//   if (ele !== h1) ele.style.transform = 'scale(0.5)';
+// });
+
+// // Tabbed component
+
+// const tabs = document.querySelectorAll('.operations__tab');
+// const tabsContainer = document.querySelector('.operations__tab-container');
+// const tabsContent = document.querySelectorAll('.operations__content');
+
+// // tabs.forEach(t => {
+// //   t.addEventListener('click', e => {
+// //     e.preventDefault();
+// //     console.log('test');
+// //   });
+// // });
+
+// tabsContainer.addEventListener('click', function (e) {
+//   const clicked = e.target.closest('.operations__tab');
+//   // console.log(clicked);
+//   if (!clicked) return;
+
+//   tabs.forEach(t => t.classList.remove('operations__tab--active'));
+//   clicked.classList.add('operations__tab--active');
+
+//   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+//   const currentContent = document.querySelector(
+//     `.operations__content--${clicked.dataset.tab}`
+//   );
+
+//   currentContent.classList.add('operations__content--active');
+// });
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+  if (!clicked) return;
+
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  let tabNumber = clicked.dataset.tab;
+  console.log(tabNumber);
+  const currentContent = document.querySelector(
+    `.operations__content--${tabNumber}`
+  );
+  currentContent.classList.add('operations__content--active');
+});
+
+///////
+// navLinks.addEventListener('mousrover', function (e) {
+//   const hovered = e.target.closest('.nav__links');
+//   console.log(hovered);
+// });
+
+nav.addEventListener('mouseover', function (e) {
+  const clicked = e.target;
+  if (clicked.classList.contains('nav__link')) {
+    const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
+    const logo = clicked.closest('.nav').querySelector('img');
+
+    siblings.forEach(link => {
+      if (link !== clicked) link.style.opacity = '0.5';
+    });
+    logo.style.opacity = '0.5';
+  }
+});
+
+nav.addEventListener('mouseout', function (e) {
+  const clicked = e.target;
+  if (clicked.classList.contains('nav__link')) {
+    const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
+    const logo = clicked.closest('.nav').querySelector('img');
+    siblings.forEach(link => {
+      if (link !== clicked) link.style.opacity = '1';
+    });
+    logo.style.opacity = '1';
+  }
 });
