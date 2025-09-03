@@ -249,27 +249,43 @@ tabsContainer.addEventListener('click', function (e) {
 //   console.log(hovered);
 // });
 
-nav.addEventListener('mouseover', function (e) {
-  const clicked = e.target;
-  if (clicked.classList.contains('nav__link')) {
-    const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
-    const logo = clicked.closest('.nav').querySelector('img');
+const handleHover = function (hoverType, opacity) {
+  nav.addEventListener(hoverType, function (e) {
+    const clicked = e.target;
+    if (clicked.classList.contains('nav__link')) {
+      const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
+      const logo = clicked.closest('.nav').querySelector('img');
+      siblings.forEach(link => {
+        if (link !== clicked) link.style.opacity = opacity;
+      });
+      logo.style.opacity = opacity;
+    }
+  });
+};
+handleHover('mouseover', 0.5);
+handleHover('mouseout', 1);
 
-    siblings.forEach(link => {
-      if (link !== clicked) link.style.opacity = '0.5';
-    });
-    logo.style.opacity = '0.5';
-  }
-});
+// nav.addEventListener('mouseover', function (e) {
+//   const clicked = e.target;
+//   if (clicked.classList.contains('nav__link')) {
+//     const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = clicked.closest('.nav').querySelector('img');
 
-nav.addEventListener('mouseout', function (e) {
-  const clicked = e.target;
-  if (clicked.classList.contains('nav__link')) {
-    const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
-    const logo = clicked.closest('.nav').querySelector('img');
-    siblings.forEach(link => {
-      if (link !== clicked) link.style.opacity = '1';
-    });
-    logo.style.opacity = '1';
-  }
-});
+//     siblings.forEach(link => {
+//       if (link !== clicked) link.style.opacity = '0.5';
+//     });
+//     logo.style.opacity = '0.5';
+//   }
+// });
+
+// nav.addEventListener('mouseout', function (e) {
+//   const clicked = e.target;
+//   if (clicked.classList.contains('nav__link')) {
+//     const siblings = clicked.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = clicked.closest('.nav').querySelector('img');
+//     siblings.forEach(link => {
+//       if (link !== clicked) link.style.opacity = '1';
+//     });
+//     logo.style.opacity = '1';
+//   }
+// });
