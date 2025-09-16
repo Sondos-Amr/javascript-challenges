@@ -390,12 +390,13 @@ headerObserver.observe(header);
 const allSections = document.querySelectorAll('.section');
 
 const obsCallback = function (entries, obs) {
-  const [entry] = entries;
-  if (!entry.isIntersecting) return;
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
 
-  entry.target.classList.remove('section--hidden');
+    entry.target.classList.remove('section--hidden');
 
-  obs.unobserve(entry.target);
+    obs.unobserve(entry.target);
+  });
 };
 const obserbver = new IntersectionObserver(obsCallback, {
   root: null,
