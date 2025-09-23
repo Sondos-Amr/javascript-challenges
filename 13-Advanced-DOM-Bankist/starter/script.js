@@ -524,5 +524,7 @@ prevBtn.addEventListener('click', prevSlide);
 document.addEventListener('keydown', function (e) {
   console.log(e);
   if (e.key === 'ArrowRight') nextSlide();
-  if (e.key === 'ArrowLeft') prevSlide();
+  e.key === 'ArrowLeft' && prevSlide();
+
+  // if (e.key === 'ArrowLeft') prevSlide();
 });
