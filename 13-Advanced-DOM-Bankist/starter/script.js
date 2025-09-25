@@ -494,6 +494,19 @@ const slides = document.querySelectorAll('.slide');
 
 const nextBtn = document.querySelector('.slider__btn--right');
 const prevBtn = document.querySelector('.slider__btn--left');
+const dotContainer = document.querySelector('.dots');
+
+const createDots = function () {
+  slides.forEach((_, i) => {
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `
+      <button class="dots__dot" data-slide="${i}"></button>
+      `
+    );
+  });
+};
+createDots();
 
 let curSlide = 0;
 const maxSlides = slides.length;
@@ -527,4 +540,11 @@ document.addEventListener('keydown', function (e) {
   e.key === 'ArrowLeft' && prevSlide();
 
   // if (e.key === 'ArrowLeft') prevSlide();
+});
+
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset;
+    update(slide);
+  }
 });
