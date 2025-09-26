@@ -507,7 +507,15 @@ const createDots = function () {
   });
 };
 createDots();
+const activateDot = function (slide) {
+  document
+    .querySelectorAll('.dots__dot')
+    .forEach(dot => dot.classList.remove('dots__dot--active'));
 
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add('dots__dot--active');
+};
 let curSlide = 0;
 const maxSlides = slides.length;
 
@@ -523,6 +531,7 @@ const nextSlide = function () {
   if (curSlide === maxSlides - 1) curSlide = 0;
   else curSlide++;
   update(curSlide);
+  activateDot(curSlide);
 };
 nextBtn.addEventListener('click', nextSlide);
 
@@ -530,6 +539,7 @@ const prevSlide = function () {
   if (curSlide === 0) curSlide = maxSlides - 1;
   else curSlide--;
   update(curSlide);
+  activateDot(curSlide);
 };
 
 prevBtn.addEventListener('click', prevSlide);
@@ -546,5 +556,6 @@ dotContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('dots__dot')) {
     const { slide } = e.target.dataset;
     update(slide);
+    activateDot(curSlide);
   }
 });
