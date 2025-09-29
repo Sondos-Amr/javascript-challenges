@@ -55,3 +55,24 @@ console.log(p1.city);
 
 console.log(p1.hasOwnProperty('myName'));
 console.log(p1.hasOwnProperty('city'));
+
+// Object.Prototype
+console.log(p1.__proto__.__proto__);
+console.log(p1.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [4, 55, 5, 55, 88, 3, 4, 88];
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir(x => x + 1);
