@@ -261,7 +261,8 @@ const Student = function (fistName, birthYear, study) {
   Person.call(this, fistName, birthYear);
   this.study = study;
 };
-
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
 Student.prototype.intrduce = function () {
   console.log(`My Name is ${this.fistName} and I study in ${this.study}`);
 };
