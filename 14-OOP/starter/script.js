@@ -1,7 +1,7 @@
 'use strict';
 
-function Person(name, birthYear) {
-  this.myName = name;
+function Person(fullName, birthYear) {
+  this.myfullName = fullName;
   this.myBirthYear = birthYear;
   // bad way :
   // this.calcAge = function(){
@@ -53,7 +53,7 @@ Person.prototype.city = 'Cairo';
 console.log(p1);
 console.log(p1.city);
 
-console.log(p1.hasOwnProperty('myName'));
+console.log(p1.hasOwnProperty('myfullName'));
 console.log(p1.hasOwnProperty('city'));
 
 // Object.Prototype
@@ -117,23 +117,49 @@ car2.brake();
 // ES6 Classes
 
 class PersonCl {
-  constructor(name, birthYear) {
-    this.name = name;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   calcAge() {
     console.log(2025 - this.birthYear);
   }
-  greet() {
-    console.log(`HI ${this.name}`);
+  get greet() {
+    console.log(`HI ${this.fullName}`);
+  }
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not a full name!`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
   }
 }
 
 // PersonCl.prototype.greet = function () {
-//   console.log(`HI ${this.name}`);
+//   console.log(`HI ${this.fullName}`);
 // };
 
-const sondos = new PersonCl('Sondos', 2002);
+const sondos = new PersonCl('Sondos Amr', 2002);
 
 sondos.calcAge();
-sondos.greet();
+sondos.greet;
+
+// Setters and Getters
+
+const account = {
+  owner: 'Sondos',
+  movments: [400, 58, 87, 36],
+  get latest() {
+    return this.movments.slice(-1).pop();
+  },
+  set movment(mov) {
+    this.movments.push(mov);
+  },
+};
+console.log(account.latest);
+account.movment = 50;
+console.log(account.movments);
