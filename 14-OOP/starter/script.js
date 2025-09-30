@@ -137,6 +137,10 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+  // Static Methods
+  static hey(name) {
+    console.log(`Hey ${name}`);
+  }
 }
 
 // PersonCl.prototype.greet = function () {
@@ -147,6 +151,8 @@ const sondos = new PersonCl('Sondos Amr', 2002);
 
 sondos.calcAge();
 sondos.greet;
+
+PersonCl.hey('Abrar');
 
 // Setters and Getters
 
