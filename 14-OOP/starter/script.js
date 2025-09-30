@@ -113,3 +113,27 @@ car1.brake();
 const car2 = new Car('Mercedes', 95);
 car2.accelerate();
 car2.brake();
+
+// ES6 Classes
+
+class PersonCl {
+  constructor(name, birthYear) {
+    this.name = name;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(2025 - this.birthYear);
+  }
+  greet() {
+    console.log(`HI ${this.name}`);
+  }
+}
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`HI ${this.name}`);
+// };
+
+const sondos = new PersonCl('Sondos', 2002);
+
+sondos.calcAge();
+sondos.greet();
