@@ -357,3 +357,31 @@ const ali = new StudentCl('Ali mo', 1990, 'cs');
 
 ali.intrduce();
 ali.calcAge();
+
+// Inheritance Between "Classes": Object.create
+const PersonProto2 = {
+  calcAge() {
+    console.log(2025 - this.birthYear);
+  },
+  init(fistName, birthYear) {
+    this.fistName = fistName;
+    this.birthYear = birthYear;
+  },
+};
+
+const p11 = Object.create(PersonProto2);
+
+p11.init = function (fistName, birthYear, study) {
+  PersonProto2.init.call(this, fistName, birthYear);
+  this.study = study;
+};
+p11.stdying = function () {
+  console.log(`study in ${this.study}`);
+};
+p11.init('sondos amr', 2002, 'cs');
+p11.stdying();
+
+const p12 = Object.create(p11);
+
+p12.init('Abrar Amr', 2020, 'student');
+p12.stdying();
