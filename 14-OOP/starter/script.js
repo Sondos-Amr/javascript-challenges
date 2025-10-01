@@ -131,7 +131,7 @@ class PersonCl {
     if (name.includes(' ')) {
       this._fullName = name;
     } else {
-      alert(`${name} is not a full name!`);
+      alert(`${name}is not a full name!`);
     }
   }
   get fullName() {
@@ -180,7 +180,8 @@ const PersonProto = {
     console.log(2025 - this.birthYear);
   },
   init(fullName, birthYear) {
-    (this.fullName = fullName), (this.birthYear = birthYear);
+    this.fullName = fullName;
+    this.birthYear = birthYear;
   },
 };
 
@@ -330,3 +331,29 @@ const childCar = new EV('Tesla', 120, 23);
 childCar.accelerate();
 childCar.chargeBattery(90);
 childCar.brake();
+
+// Inheritance Between "Classes": ES6 Classes
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, study) {
+    super(fullName, birthYear);
+    this.study = study;
+  }
+  intrduce() {
+    console.log(`My name is ${this._fullName} and I study ${this.study}`);
+  }
+  calcAge() {
+    console.log(
+      `I am ${
+        2025 - this.birthYear
+      } years old , but as a student i feel more like ${
+        2025 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const ali = new StudentCl('Ali mo', 1990, 'cs');
+
+ali.intrduce();
+ali.calcAge();
