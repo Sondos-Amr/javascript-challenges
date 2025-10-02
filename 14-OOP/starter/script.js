@@ -385,3 +385,36 @@ const p12 = Object.create(p11);
 
 p12.init('Abrar Amr', 2020, 'student');
 p12.stdying();
+
+// Another Class Example
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movments = [];
+  }
+  deposit(val) {
+    this.movments.push(val);
+  }
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan approve');
+    }
+  }
+}
+const acc1 = new Account('Sondos', 'ar', 2222);
+
+acc1.deposit(50);
+acc1.withdraw(20);
+acc1.requestLoan(3000);
+acc1.approveLoan(3000);
+console.log(acc1.pin);
