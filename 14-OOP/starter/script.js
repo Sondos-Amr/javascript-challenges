@@ -215,33 +215,33 @@ DATA CAR 1: 'Ford' going at 120 km/h
 GOOD LUCK 😀
 */
 
-class CarCl {
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
-  accelerate() {
-    this.speed += 10;
-    console.log(`${this.make} Speed: ${this.speed} km/h`);
-  }
-  brake() {
-    this.speed -= 5;
-    console.log(`${this.make} Speed: ${this.speed} km/h`);
-  }
-  get speedUS() {
-    return this.speed / 1.6;
-  }
-  set speedUS(value) {
-    this.speed = value * 1.6;
-  }
-}
+// class CarCl {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`${this.make} Speed: ${this.speed} km/h`);
+//   }
+//   brake() {
+//     this.speed -= 5;
+//     console.log(`${this.make} Speed: ${this.speed} km/h`);
+//   }
+//   get speedUS() {
+//     return this.speed / 1.6;
+//   }
+//   set speedUS(value) {
+//     this.speed = value * 1.6;
+//   }
+// }
 
-const ford = new CarCl('Ford', 120);
-console.log(ford.speedUS);
-ford.accelerate();
-ford.brake();
-ford.speedUS = 50;
-console.log(ford);
+// const ford = new CarCl('Ford', 120);
+// console.log(ford.speedUS);
+// ford.accelerate();
+// ford.brake();
+// ford.speedUS = 50;
+// console.log(ford);
 
 // Inheritance Between "Classes": Constructor Functions
 
@@ -287,50 +287,50 @@ DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
 GOOD LUCK 😀
 */
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(`${this.make} Speed: ${this.speed} km/h`);
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} Speed: ${this.speed} km/h`);
+// };
 
-Car.prototype.brake = function () {
-  this.speed -= 15;
-  console.log(`${this.make} Speed: ${this.speed} km/h`);
-};
+// Car.prototype.brake = function () {
+//   this.speed -= 15;
+//   console.log(`${this.make} Speed: ${this.speed} km/h`);
+// };
 
-const bm = new Car('BMW', 120);
-bm.accelerate();
-bm.brake();
+// const bm = new Car('BMW', 120);
+// bm.accelerate();
+// bm.brake();
 
-const EV = function (make, speed, charge) {
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
 
-EV.prototype = Object.create(Car.prototype);
-EV.prototype.constructor = EV;
+// EV.prototype = Object.create(Car.prototype);
+// EV.prototype.constructor = EV;
 
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
 
-EV.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge--;
-  console.log(
-    `${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}%`
-  );
-};
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}%`
+//   );
+// };
 
-const childCar = new EV('Tesla', 120, 23);
+// const childCar = new EV('Tesla', 120, 23);
 
-childCar.accelerate();
-childCar.chargeBattery(90);
-childCar.brake();
+// childCar.accelerate();
+// childCar.chargeBattery(90);
+// childCar.brake();
 
 // Inheritance Between "Classes": ES6 Classes
 
@@ -423,50 +423,120 @@ p12.stdying();
 /////////////////////////////////////////////////
 // Encapsulation: Private Class Fields and Methods
 
-class Account {
-  locale = navigator.language;
-  #movments = [];
-  #pin;
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    this.#pin = pin;
-    // this.movments = [];
-    // this.locale = navigator.language;
+// class Account {
+//   locale = navigator.language;
+//   #movments = [];
+//   #pin;
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.#pin = pin;
+//     // this.movments = [];
+//     // this.locale = navigator.language;
+//   }
+
+//   // Public Interface (API)
+
+//   deposit(val) {
+//     this.#movments.push(val);
+//   }
+//   withdraw(val) {
+//     this.deposit(-val);
+//   }
+
+//   #approveLoan(val) {
+//     return true;
+//   }
+//   requestLoan(val) {
+//     if (this.#approveLoan(val)) {
+//       this.deposit(val);
+//       console.log('Loan approve');
+//     }
+//   }
+//   pinc() {
+//     console.log(this.#pin);
+//   }
+// }
+// const acc1 = new Account('Sondos', 'ar', 2222);
+
+// acc1.deposit(50);
+// acc1.withdraw(20);
+// acc1.requestLoan(3000);
+// acc1.approveLoan(3000);
+// // console.log(acc1.pin);
+
+// console.log(acc1.locale);
+
+// // private field
+// // console.log(acc1.#movments);
+// acc1.pinc();
+
+//////////////////////////////
+// Chaining Methods
+
+// console.log('===============');
+// console.log(acc1);
+// const movments = acc1.deposit(500).withdraw(58);
+// console.log(movments);
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  // Public Interface (API)
-
-  deposit(val) {
-    this.#movments.push(val);
-  }
-  withdraw(val) {
-    this.deposit(-val);
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} Speed: ${this.speed} km/h`);
+    return this;
   }
 
-  #approveLoan(val) {
-    return true;
-  }
-  requestLoan(val) {
-    if (this.#approveLoan(val)) {
-      this.deposit(val);
-      console.log('Loan approve');
-    }
-  }
-  pinc() {
-    console.log(this.#pin);
+  brake() {
+    this.speed -= 15;
+    console.log(`${this.make} Speed: ${this.speed} km/h`);
+    return this;
   }
 }
-const acc1 = new Account('Sondos', 'ar', 2222);
 
-acc1.deposit(50);
-acc1.withdraw(20);
-acc1.requestLoan(3000);
-acc1.approveLoan(3000);
-// console.log(acc1.pin);
+const bm = new CarCl('BMW', 120);
+bm.accelerate();
+bm.brake();
 
-console.log(acc1.locale);
+class EVCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
 
-// private field
-// console.log(acc1.#movments);
-acc1.pinc();
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }%`
+    );
+    return this;
+  }
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+rivian.accelerate().brake().chargeBattery(40);
