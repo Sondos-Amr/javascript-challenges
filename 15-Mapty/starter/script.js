@@ -119,6 +119,8 @@ class App {
 
     const validInputs = (...inputs) =>
       inputs.every(input => Number.isFinite(input));
+
+    const allPositive = (...inputs) => inputs.every(input => input > 0);
     // inputCadence.value =
     //   inputDistance.value =
     //   inputDuration.value =
@@ -135,13 +137,17 @@ class App {
         // !Number.isFinite(duration) &&
         // !Number.isFinity(cadence)
 
-        !validInputs(distance, duration, cadence)
+        !validInputs(distance, duration, cadence) &&
+        !allPositive(distance, duration, cadence)
       )
         return alert('Inputs have to be positive numbers!');
     }
     if (type === 'cycling') {
       const elevation = +inputElevation.value;
-      if (!validInputs(distance, duration, elevation))
+      if (
+        !validInputs(distance, duration, elevation) &&
+        !allPositive(distance, duration, elevation)
+      )
         return alert('Inputs have to be positive numbers!');
     }
 
