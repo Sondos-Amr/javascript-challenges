@@ -74,7 +74,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 class Workout {
   date = new Date();
-  id = (new Date() + '').slice(-10);
+  id = crypto.randomUUID();
 
   constructor(coords, distance, duration) {
     this.coords = coords;
@@ -104,6 +104,11 @@ class Cycling extends Workout {
     return this.speed;
   }
 }
+
+// const run1 = new Running([39, -12], 5.2, 24, 178);
+// const cycl1 = new Cycling([39, -12], 27, 95, 523);
+// console.log(run1, cycl1);
+
 class App {
   #map;
   #mapEvent;
