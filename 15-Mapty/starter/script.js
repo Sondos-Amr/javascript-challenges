@@ -298,10 +298,13 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+
 class App {
   #map;
+  #mapE;
   constructor() {
     this._getPosition();
+    form.addEventListener('submit', this._newWorkout.bind(this));
   }
   _getPosition() {
     if (navigator.geolocation) {
@@ -326,6 +329,45 @@ class App {
     }).addTo(this.#map);
 
     L.marker(coords).addTo(this.#map).bindPopup('workout').openPopup();
+    this._showForm();
+  }
+
+  _showForm() {
+    this.#map.on('click', function (mapEvent) {
+      const { lat, lng } = mapEvent.latlng;
+      console.log(lat, lng);
+      form.classList.remove('hidden');
+      inputDistance.focus();
+    });
+  }
+  _newWorkout(e) {
+    e.preventDefault();
+
+    // validation
+
+    const validInputs = (...inputs) =>
+      inputs.every(input => Number.isFinite(input));
+    const allPositive = (...inputs) => inputs.every(input => input > 0);
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+      if (
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      )
+        return alert('your data are not valid!');
+    }
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+      if (
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration, elevation)
+      )
+        return alert('your data are not valid!');
+    }
   }
 }
 
