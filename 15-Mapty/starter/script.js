@@ -299,9 +299,34 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+class Workout {
+  #date = new Date();
+  #id = crypto.randomUUID();
+  constructor(coords, distance, duration) {
+    this.coords = coords;
+    this.distance = distance;
+    this.duration = duration;
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevation) {
+    super(coords, distance, duration);
+    this.elevation = elevation;
+  }
+}
+
 class App {
   #map;
   #mapE;
+  #dataWorkouts = [];
   constructor() {
     this._getPosition();
     form.addEventListener('submit', this._newWorkout.bind(this));
@@ -336,6 +361,7 @@ class App {
     this.#map.on('click', function (mapEvent) {
       const { lat, lng } = mapEvent.latlng;
       console.log(lat, lng);
+      this.#mapE = mapEvent;
       form.classList.remove('hidden');
       inputDistance.focus();
     });
@@ -359,7 +385,11 @@ class App {
         !allPositive(distance, duration, cadence)
       )
         return alert('your data are not valid!');
+      const { lat, lng } = this.#mapE.latlng;
+      const running = new Running([lat, lng], distance, duration, cadence);
+      this.#dataWorkouts.push(running);
     }
+
     if (type === 'cycling') {
       const elevation = +inputElevation.value;
       if (
@@ -367,7 +397,14 @@ class App {
         !allPositive(distance, duration, elevation)
       )
         return alert('your data are not valid!');
+      const { lat, lng } = this.#mapE.latlng;
+      const cycling = new Cycling([lat, lng], distance, duration, elevation);
+      this.#dataWorkouts.push(cycling);
     }
+  }
+  _renderWorkoutMarker() {
+    const { lat, lng } = this.#mapE.latlng;
+    this.#map.marker([lat, lng]).addTo(this.#map).bindPopup(this.#map({}));
   }
 }
 
