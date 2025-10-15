@@ -1,5 +1,25 @@
 'use strict';
 
+const form = document.querySelector('.form');
+const containerWorkouts = document.querySelector('.workouts');
+const inputType = document.querySelector('.form__input--type');
+const inputDistance = document.querySelector('.form__input--distance');
+const inputDuration = document.querySelector('.form__input--duration');
+const inputCadence = document.querySelector('.form__input--cadence');
+const inputElevation = document.querySelector('.form__input--elevation');
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      const { latitude, longitude } = position.coords;
+      const coords = [latitude, longitude];
+      console.log(coords);
+    },
+    function () {
+      alert('Could not get your position');
+    }
+  );
+}
 // const form = document.querySelector('.form');
 // const containerWorkouts = document.querySelector('.workouts');
 // const inputType = document.querySelector('.form__input--type');
@@ -291,121 +311,113 @@
 // //   );
 // // }
 
-const form = document.querySelector('.form');
-const containerWorkouts = document.querySelector('.workouts');
-const inputType = document.querySelector('.form__input--type');
-const inputDistance = document.querySelector('.form__input--distance');
-const inputDuration = document.querySelector('.form__input--duration');
-const inputCadence = document.querySelector('.form__input--cadence');
-const inputElevation = document.querySelector('.form__input--elevation');
+// class Workout {
+//   #date = new Date();
+//   #id = crypto.randomUUID();
+//   constructor(coords, distance, duration) {
+//     this.coords = coords;
+//     this.distance = distance;
+//     this.duration = duration;
+//   }
+// }
 
-class Workout {
-  #date = new Date();
-  #id = crypto.randomUUID();
-  constructor(coords, distance, duration) {
-    this.coords = coords;
-    this.distance = distance;
-    this.duration = duration;
-  }
-}
+// class Running extends Workout {
+//   constructor(coords, distance, duration, cadence) {
+//     super(coords, distance, duration);
+//     this.cadence = cadence;
+//   }
+// }
 
-class Running extends Workout {
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
-    this.cadence = cadence;
-  }
-}
+// class Cycling extends Workout {
+//   constructor(coords, distance, duration, elevation) {
+//     super(coords, distance, duration);
+//     this.elevation = elevation;
+//   }
+// }
 
-class Cycling extends Workout {
-  constructor(coords, distance, duration, elevation) {
-    super(coords, distance, duration);
-    this.elevation = elevation;
-  }
-}
+// class App {
+//   #map;
+//   #mapE;
+//   #dataWorkouts = [];
+//   constructor() {
+//     this._getPosition();
+//     form.addEventListener('submit', this._newWorkout.bind(this));
+//   }
+//   _getPosition() {
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(
+//         this._loadMap.bind(this),
+//         function () {
+//           alert('Could not get your position!!');
+//         }
+//       );
+//     }
+//   }
+//   _loadMap(position) {
+//     // give curr coords
+//     const { latitude, longitude } = position.coords;
+//     const coords = [latitude, longitude];
 
-class App {
-  #map;
-  #mapE;
-  #dataWorkouts = [];
-  constructor() {
-    this._getPosition();
-    form.addEventListener('submit', this._newWorkout.bind(this));
-  }
-  _getPosition() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        this._loadMap.bind(this),
-        function () {
-          alert('Could not get your position!!');
-        }
-      );
-    }
-  }
-  _loadMap(position) {
-    // give curr coords
-    const { latitude, longitude } = position.coords;
-    const coords = [latitude, longitude];
+//     this.#map = L.map('map').setView(coords, 13);
 
-    this.#map = L.map('map').setView(coords, 13);
+//     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//       attribution:
+//         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+//     }).addTo(this.#map);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(this.#map);
+//     L.marker(coords).addTo(this.#map).bindPopup('workout').openPopup();
+//     this._showForm();
+//   }
 
-    L.marker(coords).addTo(this.#map).bindPopup('workout').openPopup();
-    this._showForm();
-  }
+//   _showForm() {
+//     this.#map.on('click', function (mapEvent) {
+//       const { lat, lng } = mapEvent.latlng;
+//       console.log(lat, lng);
+//       this.#mapE = mapEvent;
+//       form.classList.remove('hidden');
+//       inputDistance.focus();
+//     });
+//   }
+//   _newWorkout(e) {
+//     e.preventDefault();
 
-  _showForm() {
-    this.#map.on('click', function (mapEvent) {
-      const { lat, lng } = mapEvent.latlng;
-      console.log(lat, lng);
-      this.#mapE = mapEvent;
-      form.classList.remove('hidden');
-      inputDistance.focus();
-    });
-  }
-  _newWorkout(e) {
-    e.preventDefault();
+//     // validation
 
-    // validation
+//     const validInputs = (...inputs) =>
+//       inputs.every(input => Number.isFinite(input));
+//     const allPositive = (...inputs) => inputs.every(input => input > 0);
+//     const type = inputType.value;
+//     const distance = +inputDistance.value;
+//     const duration = +inputDuration.value;
 
-    const validInputs = (...inputs) =>
-      inputs.every(input => Number.isFinite(input));
-    const allPositive = (...inputs) => inputs.every(input => input > 0);
-    const type = inputType.value;
-    const distance = +inputDistance.value;
-    const duration = +inputDuration.value;
+//     if (type === 'running') {
+//       const cadence = +inputCadence.value;
+//       if (
+//         !validInputs(distance, duration, cadence) ||
+//         !allPositive(distance, duration, cadence)
+//       )
+//         return alert('your data are not valid!');
+//       const { lat, lng } = this.#mapE.latlng;
+//       const running = new Running([lat, lng], distance, duration, cadence);
+//       this.#dataWorkouts.push(running);
+//     }
 
-    if (type === 'running') {
-      const cadence = +inputCadence.value;
-      if (
-        !validInputs(distance, duration, cadence) ||
-        !allPositive(distance, duration, cadence)
-      )
-        return alert('your data are not valid!');
-      const { lat, lng } = this.#mapE.latlng;
-      const running = new Running([lat, lng], distance, duration, cadence);
-      this.#dataWorkouts.push(running);
-    }
+//     if (type === 'cycling') {
+//       const elevation = +inputElevation.value;
+//       if (
+//         !validInputs(distance, duration, elevation) ||
+//         !allPositive(distance, duration, elevation)
+//       )
+//         return alert('your data are not valid!');
+//       const { lat, lng } = this.#mapE.latlng;
+//       const cycling = new Cycling([lat, lng], distance, duration, elevation);
+//       this.#dataWorkouts.push(cycling);
+//     }
+//   }
+//   _renderWorkoutMarker() {
+//     const { lat, lng } = this.#mapE.latlng;
+//     this.#map.marker([lat, lng]).addTo(this.#map).bindPopup(this.#map({}));
+//   }
+// }
 
-    if (type === 'cycling') {
-      const elevation = +inputElevation.value;
-      if (
-        !validInputs(distance, duration, elevation) ||
-        !allPositive(distance, duration, elevation)
-      )
-        return alert('your data are not valid!');
-      const { lat, lng } = this.#mapE.latlng;
-      const cycling = new Cycling([lat, lng], distance, duration, elevation);
-      this.#dataWorkouts.push(cycling);
-    }
-  }
-  _renderWorkoutMarker() {
-    const { lat, lng } = this.#mapE.latlng;
-    this.#map.marker([lat, lng]).addTo(this.#map).bindPopup(this.#map({}));
-  }
-}
-
-const app = new App();
+// const app = new App();
