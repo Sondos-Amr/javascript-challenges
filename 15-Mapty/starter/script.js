@@ -57,6 +57,38 @@ const inputElevation = document.querySelector('.form__input--elevation');
 //   inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
 // });
 
+class Workout {
+  data = new Date();
+  id = (new Date() + '').slice(-10);
+  constructor(coords, distance, duration) {
+    this.coords = coords;
+    this.distance = distance;
+    this.duration = duration;
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+  }
+  _calcPace() {
+    this.place = this.duration / this.distance;
+    return this.place;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevation) {
+    super(coords, distance, duration);
+    this.elevation = elevation;
+  }
+  _calcSpeed() {
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
 class App {
   #map;
   #mapEvent;
