@@ -136,6 +136,44 @@ class App {
   }
   _newWorkout(e) {
     e.preventDefault();
+
+    const validInputs = (...inputs) =>
+      inputs.every(input => Number.isFinite(input));
+
+    const allPositive = (...inputs) => inputs.every(input => input > 0);
+
+    // get data from form
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+
+    // check if data is valid
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+      if (
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      )
+        return alert('Inputs have to be positve number!');
+    }
+
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+
+      if (
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration, elevation)
+      )
+        return alert('Inputs have to be positve number!');
+    }
+
+    // if workout running and create running object
+
+    // if workout cycling and create running object
+
+    // add new object to workout array
+
+    // render workout on map and marker
     const { lat, lng } = this.#mapEvent.latlng;
     L.marker([lat, lng])
       .addTo(this.#map)
@@ -150,6 +188,15 @@ class App {
       )
       .setPopupContent('Workout')
       .openPopup();
+
+    // render workout on list
+
+    // hide fron and clear innput fields
+    inputDistance.value =
+      inputCadence.value =
+      inputDuration.value =
+      inputElevation.value =
+        '';
   }
 }
 const app = new App();
