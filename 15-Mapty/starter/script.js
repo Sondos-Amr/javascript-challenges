@@ -82,7 +82,7 @@ class Workout {
     ];
     this.description = ` ${this.type[0].toUpperCase()}${this.type.slice(
       1
-    )} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
+    )} on ${this.date.getDate()} ${months[this.date.getMonth()]} `;
   }
 }
 
@@ -235,7 +235,9 @@ class App {
           className: `${workout.type}-popup`,
         })
       )
-      .setPopupContent('Workout')
+      .setPopupContent(
+        `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
+      )
       .openPopup();
   }
   _renderWorkout(workout) {
