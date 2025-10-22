@@ -156,6 +156,17 @@ class App {
     form.classList.remove('hidden');
     inputDistance.focus();
   }
+  _hidenForm() {
+    // Empty inputs
+    inputDistance.value =
+      inputCadence.value =
+      inputDuration.value =
+      inputElevation.value =
+        '';
+    form.style.display = 'none';
+    form.classList.add('hidden');
+    setTimeout(() => (form.style.display = 'grid'), 1000);
+  }
   _toggleElevationField() {
     inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
     inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
@@ -180,7 +191,7 @@ class App {
       const cadence = +inputCadence.value;
       if (
         !validInputs(distance, duration, cadence) ||
-        !allPositive(distance, duration, cadence)
+        !allPositive(distance, duration)
       )
         return alert('Inputs have to be positve number!');
       // if workout running and create running object
@@ -192,7 +203,7 @@ class App {
 
       if (
         !validInputs(distance, duration, elevation) ||
-        !allPositive(distance, duration, elevation)
+        !allPositive(distance, duration)
       )
         return alert('Inputs have to be positve number!');
       // if workout cycling and create running object
@@ -210,12 +221,7 @@ class App {
     // render workout on list
     this._renderWorkout(workout);
 
-    // hide fron and clear innput fields
-    inputDistance.value =
-      inputCadence.value =
-      inputDuration.value =
-      inputElevation.value =
-        '';
+    this._hidenForm();
   }
   _renderWorkoutMarker(workout) {
     L.marker(workout.coords)
