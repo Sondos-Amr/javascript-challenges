@@ -60,6 +60,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
+  clicks = 0;
   constructor(coords, distance, duration) {
     this.coords = coords;
     this.distance = distance;
@@ -83,6 +84,9 @@ class Workout {
     this.description = ` ${this.type[0].toUpperCase()}${this.type.slice(
       1
     )} on ${this.date.getDate()} ${months[this.date.getMonth()]} `;
+  }
+  click() {
+    this.clicks++;
   }
 }
 
@@ -311,6 +315,7 @@ class App {
         duration: 1,
       },
     });
+    workout.click();
   }
 }
 const app = new App();
