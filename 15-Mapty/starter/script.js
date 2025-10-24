@@ -130,6 +130,7 @@ class App {
     // get user's position
     this._getPosition();
     // get data from local storage
+    this._getLocalStorage();
 
     // attach event handlers
     this._addEventListeners();
@@ -161,6 +162,9 @@ class App {
     }).addTo(this.#map);
 
     this.#map.on('click', this._showForm.bind(this));
+    this.#workouts.forEach(work => {
+      this._renderWorkoutMarker(work);
+    });
   }
   _showForm(mapE) {
     this.#mapEvent = mapE;
@@ -326,7 +330,17 @@ class App {
     workout.click();
   }
   _setLocalStorage() {
-    localStorage.setItem('workout', JSON.stringify(this.#workouts));
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+    console.log(data);
+    if (!data) return;
+    this.#workouts = data;
+    this.#workouts.forEach(work => {
+      this._renderWorkout(work);
+      this._renderWorkoutMarker(work);
+    });
   }
 }
 const app = new App();
