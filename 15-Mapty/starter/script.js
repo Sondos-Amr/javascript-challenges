@@ -126,7 +126,12 @@ class App {
   constructor() {
     // this.#map;
     // this.#mapEvent;
+
+    // get user's position
     this._getPosition();
+    // get data from local storage
+
+    // attach event handlers
     this._addEventListeners();
   }
   _addEventListeners() {
@@ -228,6 +233,9 @@ class App {
     this._renderWorkout(workout);
 
     this._hideForm();
+
+    // Set local storage to all workouts
+    this._setLocalStorage();
   }
   _renderWorkoutMarker(workout) {
     L.marker(workout.coords)
@@ -316,6 +324,9 @@ class App {
       },
     });
     workout.click();
+  }
+  _setLocalStorage() {
+    localStorage.setItem('workout', JSON.stringify(this.#workouts));
   }
 }
 const app = new App();
