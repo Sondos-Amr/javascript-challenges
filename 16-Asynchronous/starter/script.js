@@ -10,10 +10,9 @@ const countriesContainer = document.querySelector('.countries');
 // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
 
 ///////////////////////////////////////
-
-const renderCounter = function (data) {
+const renderCounter = function (data, className = '') {
   const html = `
-      <article class="country">
+  <article class="country ${className}">
               <img class="country__img" src="${data.flag}" />
               <div class="country__data">
                   <h3 class="country__name">${data.name}</h3>
@@ -34,22 +33,25 @@ const renderCounter = function (data) {
   countriesContainer.style.opacity = 1;
 };
 const getCountries = function (country) {
-  const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.com/v2/name/${country}`);
+  const request1 = new XMLHttpRequest();
+  request1.open('GET', `https://restcountries.com/v2/name/${country}`);
+  request1.send();
 
-  request.send();
-  // console.log(request.responseText);
+  request1.addEventListener('load', function () {
+    const [dataResponse1] = JSON.parse(this.responseText);
+    console.log(dataResponse1);
+    renderCounter(dataResponse1);
 
-  request.addEventListener('load', function () {
-    console.log('===== Json ===== ');
-    console.log(this.responseText);
-    const [data] = JSON.parse(this.responseText);
-    console.log('===== Json convert to js obj ===== ');
-    console.log(data);
-
-    renderCounter(data);
+    const neighbourCode = dataResponse1.borders[2];
+    if (!neighbourCode) return;
+    const request2 = new XMLHttpRequest();
+    request2.open('GET', `https://restcountries.com/v2/alpha/${neighbourCode}`);
+    request2.send();
+    request2.addEventListener('load', function () {
+      const dataResponse2 = JSON.parse(this.responseText);
+      renderCounter(dataResponse2, 'neighbour');
+    });
   });
 };
-
 getCountries('egypt');
 getCountries('palestine');
