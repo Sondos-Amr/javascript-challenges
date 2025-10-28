@@ -94,6 +94,14 @@ const renderCounter = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
+// Handling Rejected Promises
+const renderError = function (message) {
+  btn.addEventListener('click', function () {
+    countriesContainer.insertAdjacentText('beforeend', message);
+    countriesContainer.style.opacity = 1;
+  });
+};
+
 // Consuming Promises
 
 const getCountryData = function (country) {
@@ -107,7 +115,12 @@ const getCountryData = function (country) {
       return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
     })
     .then(response => response.json())
-    .then(data => renderCounter(data, 'neighbour'));
+    .then(data => renderCounter(data, 'neighbour'))
+    .catch(err => {
+      console.error(err, '🚨🚨🚨');
+      renderError(`Something went wrong 🚨🚨🚨 ${err.message} Try again!`);
+    });
 };
-
-getCountryData('egypt');
+btn.addEventListener('click', function () {
+  getCountryData('egypt');
+});
