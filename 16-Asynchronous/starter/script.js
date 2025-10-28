@@ -95,13 +95,8 @@ const renderCounter = function (data, className = '') {
 };
 // Consuming Promises
 const getCountryData = function (country) {
-  const request = fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      renderCounter(data[0]);
-    });
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCounter(data[0]));
 };
 getCountryData('egypt');
