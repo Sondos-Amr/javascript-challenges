@@ -93,10 +93,21 @@ const renderCounter = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
   countriesContainer.style.opacity = 1;
 };
+
 // Consuming Promises
+
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v2/name/${country}`)
     .then(response => response.json())
-    .then(data => renderCounter(data[0]));
+    .then(data => {
+      renderCounter(data[0]);
+
+      // Chaining Promises
+      const neighbour = data[0].borders?.[1];
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data => renderCounter(data, 'neighbour'));
 };
+
 getCountryData('egypt');
