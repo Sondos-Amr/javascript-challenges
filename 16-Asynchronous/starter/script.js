@@ -198,12 +198,18 @@ const renderCounter = function (data, className = '') {
   <article class="country ${className}">
               <img class="country__img" src="${data.flags.png}" />
               <div class="country__data">
-                  <h3 class="country__name">${data.name.common}</h3>
+                  <h3 class="country__name">${
+                    data.currencies
+                      ? Object.values(data.currencies)[0].name
+                      : 'No data'
+                  }</h3>
                   <h4 class="country__region">${data.continents[0]}</h4>
                   <p class="country__row"><span>👫</span>${(
                     +data.population / 1000000
                   ).toFixed(1)}</p>
-                  <p class="country__row"><span>🗣️</span>${data.languages}</p>
+                  <p class="country__row"><span>🗣️</span>${
+                    Object.values(data.languages)[0]
+                  }</p>
                   <p class="country__row"><span>💰</span>${
                     data.currencies.EUR.name
                   }</p>
@@ -218,6 +224,7 @@ const renderError = function (error) {
   countriesContainer.insertAdjacentText('beforeend', error);
   showEle();
 };
+
 const whereAmI = function (lat, lng) {
   getJSON(
     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
@@ -244,3 +251,15 @@ btn.addEventListener('click', function () {
   whereAmI(19.037, 72.873);
   whereAmI(-33.933, 18.474);
 });
+
+// The Event Loop in Practice
+
+console.log('start');
+setTimeout(() => console.log('0 second thimer'), 0);
+Promise.resolve('Resolved promise 1').then(response => console.log(response));
+
+Promise.resolve('Resolves promise 2').then(res => {
+  for (let i = 0; i < 1000000; i++) {}
+  console.log(res);
+});
+console.log('end');
