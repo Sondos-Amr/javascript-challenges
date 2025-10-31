@@ -254,12 +254,34 @@ btn.addEventListener('click', function () {
 
 // The Event Loop in Practice
 
-console.log('start');
-setTimeout(() => console.log('0 second thimer'), 0);
-Promise.resolve('Resolved promise 1').then(response => console.log(response));
+// console.log('start');
+// setTimeout(() => console.log('0 second thimer'), 0);
+// Promise.resolve('Resolved promise 1').then(response => console.log(response));
 
-Promise.resolve('Resolves promise 2').then(res => {
-  for (let i = 0; i < 1000000; i++) {}
-  console.log(res);
+// Promise.resolve('Resolves promise 2').then(res => {
+//   for (let i = 0; i < 1000000; i++) {}
+//   console.log(res);
+// });
+// console.log('end');
+
+//  Building a Simple Promise
+
+// way 1
+
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   if (Math.random() >= 0.5) resolve('You WIN 😉🎉🎉👏👏');
+//   else reject('You lost your money 😢');
+// })
+//   .then(res => console.log(res))
+//   .catch(err => console.log(err));
+
+// lotteryPromise();
+
+// way 2
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+  if (Math.random() >= 0.5) resolve('You WIN 😉🎉🎉👏👏');
+  else reject('You lost your money 😢');
 });
-console.log('end');
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
