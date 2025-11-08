@@ -297,16 +297,16 @@ lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
 
 // console.log('Getting position');
 
-const getPosition = function () {
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-};
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
 
 // getPosition().then(pos => console.log(pos));
 
 /////
-
+/*
 const getJSON = function (url) {
   return fetch(url).then(response => {
     if (!response.ok) throw new Error(`Country not found! ${response.status} `);
@@ -375,7 +375,7 @@ const whereAmI = function () {
 };
 
 btn.addEventListener('click', whereAmI);
-
+*/
 ///////////////////////////////////////
 // Coding Challenge #2
 
@@ -400,3 +400,22 @@ TEST DATA: Images in the img folder. Test the error handler by passing a wrong i
 
 GOOD LUCK 😀
 */
+
+const createImg = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const getImg = document.createElement('img');
+    getImg.src = imgPath;
+    getImg.addEventListener('load', function () {
+      resolve(getImg);
+    });
+    getImg.addEventListener('error', function () {
+      reject(getImg);
+    });
+  });
+};
+createImg(`img/img-1.jpg`)
+  .then(res => {
+    const imgContainer = document.querySelector('.images');
+    imgContainer.insertAdjacentElement('beforeend', res);
+  })
+  .catch(err => console.log(err));
