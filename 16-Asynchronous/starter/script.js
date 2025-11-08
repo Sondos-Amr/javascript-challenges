@@ -299,13 +299,79 @@ lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
 
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
-    //   navigator.geolocation.getCurrentPosition(
-    //     position => resolve(position),
-    //     err => reject(err.message)
-    //   );
-    // });
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 };
 
-getPosition().then(pos => console.log(pos));
+// getPosition().then(pos => console.log(pos));
+
+/////
+
+const getJSON = function (url) {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`Country not found! ${response.status} `);
+    return response.json();
+  });
+};
+const showEle = function () {
+  countriesContainer.style.opacity = 1;
+};
+const renderCounter = function (data, className = '') {
+  const html = `
+  <article class="country ${className}">
+              <img class="country__img" src="${data.flags.png}" />
+              <div class="country__data">
+                  <h3 class="country__name">${
+                    data.currencies
+                      ? Object.values(data.currencies)[0].name
+                      : 'No data'
+                  }</h3>
+                  <h4 class="country__region">${data.continents[0]}</h4>
+                  <p class="country__row"><span>👫</span>${(
+                    +data.population / 1000000
+                  ).toFixed(1)}</p>
+                  <p class="country__row"><span>🗣️</span>${
+                    Object.values(data.languages)[0]
+                  }</p>
+                  <p class="country__row"><span>💰</span>${
+                    data.currencies.EUR.name
+                  }</p>
+              </div>
+        </article>
+  `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  showEle();
+};
+
+const renderError = function (error) {
+  countriesContainer.insertAdjacentText('beforeend', error);
+  showEle();
+};
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude, longitude } = pos.coords;
+      return getJSON(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
+      );
+    })
+    .then(data => {
+      console.log(`You are in ${data.city}, ${data.countryName}`);
+      const country = data.countryName;
+      if (!country) throw new Error(`No country found!`);
+      return getJSON(`https://restcountries.com/v3.1/name/${country}`);
+    })
+    .then(data => {
+      const [dataCountry] = data;
+      console.log(dataCountry);
+      if (!dataCountry) throw new Error(`No data found!`);
+
+      renderCounter(dataCountry);
+    })
+    .catch(error => {
+      renderError(`Something went wrong 🚨🚨🚨 ${error.message} Try again!`);
+    });
+};
+
+btn.addEventListener('click', whereAmI);
