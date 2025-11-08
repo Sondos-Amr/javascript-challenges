@@ -183,7 +183,7 @@ TEST COORDINATES 2: -33.933, 18.474
 
 GOOD LUCK 😀
 */
-
+/*
 const getJSON = function (url) {
   return fetch(url).then(response => {
     if (!response.ok) throw new Error(`Country not found! ${response.status} `);
@@ -251,7 +251,7 @@ btn.addEventListener('click', function () {
   whereAmI(19.037, 72.873);
   whereAmI(-33.933, 18.474);
 });
-
+*/
 // The Event Loop in Practice
 
 // console.log('start');
@@ -278,7 +278,7 @@ btn.addEventListener('click', function () {
 // lotteryPromise();
 
 // way 2
-
+/*
 const lotteryPromise = new Promise(function (resolve, reject) {
   console.log('Lotter draw is happening 🙌');
   setTimeout(function () {
@@ -288,3 +288,24 @@ const lotteryPromise = new Promise(function (resolve, reject) {
 });
 
 lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
+*/
+// Promisifying setTimeout
+
+// const wait = function () {};
+
+// Promisifying the Geolocation API
+
+// console.log('Getting position');
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     position => resolve(position),
+    //     err => reject(err.message)
+    //   );
+    // });
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition().then(pos => console.log(pos));
