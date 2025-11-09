@@ -622,3 +622,13 @@ const whereAmI = async function () {
 btn.addEventListener('click', function () {
   whereAmI();
 });
+
+// Error Handling With try...catch
+
+// try {
+//   let x = 10;
+//   const y = 41;
+//   y = 50;
+// } catch (err) {
+//   console.log(err.message);
+// }
