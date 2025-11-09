@@ -543,10 +543,12 @@ console.log('First');
 // const getJSON =  async function (url) {
 //    const res =  await fetch(url);
 // };
+
 const showEle = function () {
   countriesContainer.style.opacity = 1;
 };
 const renderCounter = function (data, className = '') {
+  console.log(data);
   const html = `
   <article class="country ${className}">
               <img class="country__img" src="${data.flags.png}" />
@@ -563,9 +565,8 @@ const renderCounter = function (data, className = '') {
                   <p class="country__row"><span>🗣️</span>${
                     Object.values(data.languages)[0]
                   }</p>
-                  <p class="country__row"><span>💰</span>${
-                    data.currencies.EUR.name
-                  }</p>
+                  <p class="country__row"><span>💰</span>
+                  ${data.currencies.EGP.name}</p>
               </div>
         </article>
   `;
@@ -585,39 +586,30 @@ const getPosition = function () {
 };
 
 const whereAmI = async function () {
-  const pos = await getPosition();
-  const { latitude, longitude } = pos.coords;
+  try {
+    const pos = await getPosition();
+    const { latitude, longitude } = pos.coords;
 
-  const resGeo = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
-  );
+    const resGeo = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
+    );
 
-  const data = await resGeo.json();
-  console.log(`You are in ${data.city}, ${data.countryName}`);
+    if (resGeo.ok) throw new Error('Problem getting location data');
 
-  const country = data.countryName;
-  const res2 = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+    const data = await resGeo.json();
+    console.log(`You are in ${data.city}, ${data.countryName}`);
 
-  const data2 = await res2.json();
-  const [dataCountry] = data2;
-  renderCounter(dataCountry);
+    const country = data.countryName;
+    const res2 = await fetch(`https://restcountries.com/v3.1/name/${country}`);
 
-  // .then(data => {
-  //   console.log(`You are in ${data.city}, ${data.countryName}`);
-  //   const country = data.countryName;
-  //   if (!country) throw new Error(`No country found!`);
-  //   return getJSON(`https://restcountries.com/v3.1/name/${country}`);
-  // })
-  // .then(data => {
-  //   const [dataCountry] = data;
-  //   console.log(dataCountry);
-  //   if (!dataCountry) throw new Error(`No data found!`);
+    if (res2.ok) throw new Error('Problem getting location data');
 
-  //   renderCounter(dataCountry);
-  // })
-  // .catch(error => {
-  //   renderError(`Something went wrong 🚨🚨🚨 ${error.message} Try again!`);
-  // });
+    const data2 = await res2.json();
+    const [dataCountry] = data2;
+    renderCounter(dataCountry);
+  } catch (err) {
+    renderError(err.message);
+  }
 };
 btn.addEventListener('click', function () {
   whereAmI();
