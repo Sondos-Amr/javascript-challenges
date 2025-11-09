@@ -401,21 +401,100 @@ TEST DATA: Images in the img folder. Test the error handler by passing a wrong i
 GOOD LUCK 😀
 */
 
+// Wait function
+// const wait = function (second) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, second * 1000);
+//   });
+// };
+
+// // Create image Promise
+// const createImg = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement('img');
+//     img.src = imgPath;
+
+//     img.addEventListener('load', function () {
+//       resolve(img);
+//     });
+
+//     img.addEventListener('error', function () {
+//       reject(new Error(`Image not found: ${imgPath}`));
+//     });
+//   });
+// };
+
+// // Display image
+// const displayImg = function (img) {
+//   const imgContainer = document.querySelector('.images');
+//   imgContainer.insertAdjacentElement('beforeend', img);
+//   return img;
+// };
+
+// // Button click - load image sequence
+// btn.addEventListener('click', function () {
+//   createImg('img/img-1.jpg')
+//     .then(res => displayImg(res))
+//     .then(img =>
+//       wait(2).then(() => {
+//         img.style.display = 'none';
+//         return createImg('img/img-2.jpg');
+//       })
+//     )
+//     .then(img2 => displayImg(img2))
+//     .then(img2 =>
+//       wait(2).then(() => {
+//         img2.style.display = 'none';
+//         return createImg('img/img-3.jpg');
+//       })
+//     )
+//     .then(img3 => displayImg(img3))
+//     .then(img3 =>
+//       wait(2).then(() => {
+//         img3.style.display = 'none';
+//       })
+//     )
+//     .catch(err => console.log(err));
+// });
+
+const wait = function (second) {
+  return new Promise(resolve => setTimeout(resolve, second * 1000));
+};
+const imgContainer = document.querySelector('.images');
 const createImg = function (imgPath) {
   return new Promise(function (resolve, reject) {
-    const getImg = document.createElement('img');
-    getImg.src = imgPath;
-    getImg.addEventListener('load', function () {
-      resolve(getImg);
+    const img = document.createElement('img');
+    img.src = imgPath;
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
     });
-    getImg.addEventListener('error', function () {
-      reject(getImg);
+
+    img.addEventListener('error', function () {
+      reject(new Error(`Image not found: ${imgPath}`));
     });
   });
 };
-createImg(`img/img-1.jpg`)
-  .then(res => {
-    const imgContainer = document.querySelector('.images');
-    imgContainer.insertAdjacentElement('beforeend', res);
-  })
-  .catch(err => console.log(err));
+
+btn.addEventListener('click', function () {
+  createImg(`img/img-1.jpg`)
+    .then(img => {
+      return wait(2).then(() => {
+        img.style.display = 'none';
+        return createImg(`img/img-2.jpg`);
+      });
+    })
+    .then(img => {
+      return wait(2).then(() => {
+        img.style.display = 'none';
+        return createImg(`img/img-3.jpg`);
+      });
+    })
+    .then(img => {
+      return wait(2).then(() => {
+        img.style.display = 'none';
+      });
+    })
+    .catch(err => console.error(err));
+});
