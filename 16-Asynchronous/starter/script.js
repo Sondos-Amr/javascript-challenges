@@ -456,7 +456,7 @@ GOOD LUCK 😀
 //     )
 //     .catch(err => console.log(err));
 // });
-
+/*
 const wait = function (second) {
   return new Promise(resolve => setTimeout(resolve, second * 1000));
 };
@@ -498,3 +498,15 @@ btn.addEventListener('click', function () {
     })
     .catch(err => console.error(err));
 });
+
+*/
+// Consuming Promises with Async/Await
+
+const whereAmI = async function (country) {
+  const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+  console.log(res);
+};
+
+whereAmI('egypt');
+
+console.log('First');
