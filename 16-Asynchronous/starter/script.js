@@ -501,6 +501,8 @@ btn.addEventListener('click', function () {
 
 */
 // Consuming Promises with Async/Await
+
+/*
 const renderCounter = function (data, className = '') {
   const html = `
   <article class="country ${className}">
@@ -535,3 +537,88 @@ const whereAmI = async function (country) {
 whereAmI('egypt');
 
 console.log('First');
+
+*/
+
+// const getJSON =  async function (url) {
+//    const res =  await fetch(url);
+// };
+const showEle = function () {
+  countriesContainer.style.opacity = 1;
+};
+const renderCounter = function (data, className = '') {
+  const html = `
+  <article class="country ${className}">
+              <img class="country__img" src="${data.flags.png}" />
+              <div class="country__data">
+                  <h3 class="country__name">${
+                    data.currencies
+                      ? Object.values(data.currencies)[0].name
+                      : 'No data'
+                  }</h3>
+                  <h4 class="country__region">${data.continents[0]}</h4>
+                  <p class="country__row"><span>👫</span>${(
+                    +data.population / 1000000
+                  ).toFixed(1)}</p>
+                  <p class="country__row"><span>🗣️</span>${
+                    Object.values(data.languages)[0]
+                  }</p>
+                  <p class="country__row"><span>💰</span>${
+                    data.currencies.EUR.name
+                  }</p>
+              </div>
+        </article>
+  `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  showEle();
+};
+
+const renderError = function (error) {
+  countriesContainer.insertAdjacentText('beforeend', error);
+  showEle();
+};
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  const pos = await getPosition();
+  const { latitude, longitude } = pos.coords;
+
+  const resGeo = await fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
+  );
+
+  const data = await resGeo.json();
+  console.log(`You are in ${data.city}, ${data.countryName}`);
+
+  const country = data.countryName;
+  const res2 = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+
+  const data2 = await res2.json();
+  const [dataCountry] = data2;
+  renderCounter(dataCountry);
+
+  // .then(data => {
+  //   console.log(`You are in ${data.city}, ${data.countryName}`);
+  //   const country = data.countryName;
+  //   if (!country) throw new Error(`No country found!`);
+  //   return getJSON(`https://restcountries.com/v3.1/name/${country}`);
+  // })
+  // .then(data => {
+  //   const [dataCountry] = data;
+  //   console.log(dataCountry);
+  //   if (!dataCountry) throw new Error(`No data found!`);
+
+  //   renderCounter(dataCountry);
+  // })
+  // .catch(error => {
+  //   renderError(`Something went wrong 🚨🚨🚨 ${error.message} Try again!`);
+  // });
+};
+btn.addEventListener('click', function () {
+  whereAmI();
+});
