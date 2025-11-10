@@ -662,10 +662,16 @@ const getPromise = function (url) {
 };
 const get3Countries = async function (c1, c2, c3) {
   try {
-    const [data1] = await getPromise(c1);
-    const [data2] = await getPromise(c2);
-    const [data3] = await getPromise(c3);
-    console.log([data1.capital, data2.capital, data3.capital]);
+    // const [data1] = await getPromise(c1);
+    // const [data2] = await getPromise(c2);
+    // const [data3] = await getPromise(c3);
+    const data = await Promise.all([
+      getPromise(c1),
+      getPromise(c2),
+      getPromise(c3),
+    ]);
+    const capital = data.map(d => d[0].capital);
+    console.log(capital);
   } catch (err) {
     console.error(err);
   }
