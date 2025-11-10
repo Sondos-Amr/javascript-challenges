@@ -544,6 +544,8 @@ console.log('First');
 //    const res =  await fetch(url);
 // };
 
+////////////////////////////////////////
+/*
 const showEle = function () {
   countriesContainer.style.opacity = 1;
 };
@@ -612,6 +614,10 @@ const whereAmI = async function () {
     throw renderError(err.message);
   }
 };
+
+*/
+////////////////////////////
+
 // btn.addEventListener('click', function () {
 //   whereAmI();
 // });
@@ -627,7 +633,7 @@ const whereAmI = async function () {
 // }
 
 // Returning Values from Async Functions
-
+/*
 console.log('First');
 const city = whereAmI();
 console.log(city);
@@ -645,3 +651,23 @@ console.log('Second');
     console.error(err);
   }
 })();
+*/
+// Running Promises in Parallel
+
+const getPromise = function (url) {
+  return fetch(`https://restcountries.com/v2/name/${url}`).then(res => {
+    if (!res.ok) throw new Error(res.status);
+    return res.json();
+  });
+};
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    const [data1] = await getPromise(c1);
+    const [data2] = await getPromise(c2);
+    const [data3] = await getPromise(c3);
+    console.log([data1.capital, data2.capital, data3.capital]);
+  } catch (err) {
+    console.error(err);
+  }
+};
+get3Countries('egypt', 'canada', 'tanzania');
