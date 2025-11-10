@@ -594,7 +594,7 @@ const whereAmI = async function () {
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
     );
 
-    if (resGeo.ok) throw new Error('Problem getting location data');
+    if (!resGeo.ok) throw new Error('Problem getting location data');
 
     const data = await resGeo.json();
     console.log(`You are in ${data.city}, ${data.countryName}`);
@@ -602,18 +602,19 @@ const whereAmI = async function () {
     const country = data.countryName;
     const res2 = await fetch(`https://restcountries.com/v3.1/name/${country}`);
 
-    if (res2.ok) throw new Error('Problem getting location data');
+    if (!res2.ok) throw new Error('Problem getting location data');
 
     const data2 = await res2.json();
     const [dataCountry] = data2;
     renderCounter(dataCountry);
+    return data.city;
   } catch (err) {
-    renderError(err.message);
+    throw renderError(err.message);
   }
 };
-btn.addEventListener('click', function () {
-  whereAmI();
-});
+// btn.addEventListener('click', function () {
+//   whereAmI();
+// });
 
 // Error Handling With try...catch
 
@@ -624,3 +625,23 @@ btn.addEventListener('click', function () {
 // } catch (err) {
 //   console.log(err.message);
 // }
+
+// Returning Values from Async Functions
+
+console.log('First');
+const city = whereAmI();
+console.log(city);
+console.log('Second');
+
+(function () {
+  console.log('hi sondos');
+})();
+
+(async function main() {
+  try {
+    const city = await whereAmI();
+    console.log(city);
+  } catch (err) {
+    console.error(err);
+  }
+})();
