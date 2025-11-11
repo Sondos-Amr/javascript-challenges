@@ -770,19 +770,28 @@ const createImg = function (imgPath) {
   });
 };
 
+const loadNPause = async function (num, sec) {
+  const img = await createImg(`img/img-${num}.jpg`);
+  await wait(sec);
+  img.style.display = 'none';
+};
+
 btn.addEventListener('click', async function () {
   try {
-    const img1 = await createImg(`img/img-1.jpg`);
-    await wait(2);
-    img1.style.display = 'none';
+    // const img1 = await createImg(img/img-1.jpg);
+    // await wait(2);
+    // img1.style.display = 'none';
 
-    const img2 = await createImg(`img/img-2.jpg`);
-    await wait(2);
-    img2.style.display = 'none';
+    // const img2 = await createImg(img/img-2.jpg);
+    // await wait(2);
+    // img2.style.display = 'none';
 
-    const img3 = await createImg(`img/img-3.jpg`);
-    await wait(2);
-    img3.style.display = 'none';
+    // const img3 = await createImg(img/img-3.jpg);
+    // await wait(2);
+    // img3.style.display = 'none';
+    await loadNPause(1, 2);
+    await loadNPause(2, 2);
+    await loadNPause(3, 2);
   } catch (err) {
     console.error(err);
   }
