@@ -702,3 +702,13 @@ const timeout = function (sec) {
 Promise.race([getPromise('tanzania'), timeout(1)])
   .then(res => console.log(res[0]))
   .catch(err => console.error(err));
+
+// Promise.allSettled – It returns all promises after they have been settled (either fulfilled or rejected)
+
+Promise.any([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another succes'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
