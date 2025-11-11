@@ -677,3 +677,16 @@ const get3Countries = async function (c1, c2, c3) {
   }
 };
 get3Countries('egypt', 'canada', 'tanzania');
+
+// Other Promise Combinators: race, allSettled and any
+
+// Promise.race – It returns the first promise that is either fulfilled or rejected
+
+(async function () {
+  const data = await Promise.race([
+    getPromise('canada'),
+    getPromise('egypt'),
+    getPromise('tanzania'),
+  ]);
+  console.log(data[0]);
+})();
