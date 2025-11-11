@@ -770,10 +770,13 @@ const createImg = function (imgPath) {
   });
 };
 
-const loadNPause = async function (num, sec) {
-  const img = await createImg(`img/img-${num}.jpg`);
-  await wait(sec);
-  img.style.display = 'none';
+const loadNPause = async function (imgNums, sec) {
+  for (let i = 0; i < imgNums.length; i++) {
+    const imgN = imgNums[i];
+    const img = await createImg(`img/img-${imgN}.jpg`);
+    await wait(sec);
+    img.style.display = 'none';
+  }
 };
 
 btn.addEventListener('click', async function () {
@@ -789,9 +792,7 @@ btn.addEventListener('click', async function () {
     // const img3 = await createImg(img/img-3.jpg);
     // await wait(2);
     // img3.style.display = 'none';
-    await loadNPause(1, 2);
-    await loadNPause(2, 2);
-    await loadNPause(3, 2);
+    await loadNPause([1, 2, 3], 2);
   } catch (err) {
     console.error(err);
   }
