@@ -654,6 +654,7 @@ console.log('Second');
 */
 // Running Promises in Parallel
 
+/*
 const getPromise = function (url) {
   return fetch(`https://restcountries.com/v2/name/${url}`).then(res => {
     if (!res.ok) throw new Error(res.status);
@@ -677,11 +678,11 @@ const get3Countries = async function (c1, c2, c3) {
   }
 };
 get3Countries('egypt', 'canada', 'tanzania');
-
+*/
 // Other Promise Combinators: race, allSettled and any
 
 // Promise.race – It returns the first promise that is either fulfilled or rejected
-
+/*
 (async function () {
   const data = await Promise.race([
     getPromise('canada'),
@@ -703,8 +704,12 @@ Promise.race([getPromise('tanzania'), timeout(1)])
   .then(res => console.log(res[0]))
   .catch(err => console.error(err));
 
+
+
+  */
 // Promise.allSettled – It returns all promises after they have been settled (either fulfilled or rejected)
 
+/*
 Promise.allSettled([
   Promise.resolve('Success'),
   Promise.reject('ERROR'),
@@ -712,9 +717,9 @@ Promise.allSettled([
 ])
   .then(res => console.log(res))
   .catch(err => console.error(err));
-
+*/
 // Promise.any – It returns the first promise that is fulfilled and ignores any rejected promises
-
+/*
 Promise.any([
   Promise.resolve('Success'),
   Promise.reject('ERROR'),
@@ -722,7 +727,7 @@ Promise.any([
 ])
   .then(res => console.log(res))
   .catch(err => console.error(err));
-
+*/
 ///////////////////////////////////////
 // Coding Challenge #3
 
@@ -742,3 +747,43 @@ TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn of
 
 GOOD LUCK 😀
 */
+
+const wait = function (second) {
+  return new Promise(resolve => setTimeout(resolve, second * 1000));
+};
+
+const imgContainer = document.querySelector('.images');
+
+const createImg = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error(`Image not found: ${imgPath}`));
+    });
+  });
+};
+
+btn.addEventListener('click', async function () {
+  try {
+    const img1 = await createImg(`img/img-1.jpg`);
+    await wait(2);
+    img1.style.display = 'none';
+
+    const img2 = await createImg(`img/img-2.jpg`);
+    await wait(2);
+    img2.style.display = 'none';
+
+    const img3 = await createImg(`img/img-3.jpg`);
+    await wait(2);
+    img3.style.display = 'none';
+  } catch (err) {
+    console.error(err);
+  }
+});
