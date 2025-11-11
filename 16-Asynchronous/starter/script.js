@@ -748,6 +748,8 @@ TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn of
 GOOD LUCK 😀
 */
 
+// Part 1
+
 const wait = function (second) {
   return new Promise(resolve => setTimeout(resolve, second * 1000));
 };
@@ -769,7 +771,7 @@ const createImg = function (imgPath) {
     });
   });
 };
-
+/*
 const loadNPause = async function (imgNums, sec) {
   for (let i = 0; i < imgNums.length; i++) {
     const imgN = imgNums[i];
@@ -797,3 +799,12 @@ btn.addEventListener('click', async function () {
     console.error(err);
   }
 });
+*/
+// Part 2
+const images = ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'];
+(async function loadAll(imgArr) {
+  console.log(imgArr);
+  const data = await Promise.all(imgArr.map(img => createImg(img)));
+  data.forEach(img => img.classList.add('paralell'));
+  console.log(data);
+})(images);
