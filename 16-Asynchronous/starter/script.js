@@ -690,3 +690,15 @@ get3Countries('egypt', 'canada', 'tanzania');
   ]);
   console.log(data[0]);
 })();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Rwquest tool too long!'));
+    }, sec * 1000);
+  });
+};
+
+Promise.race([getPromise('tanzania'), timeout(1)])
+  .then(res => console.log(res[0]))
+  .catch(err => console.error(err));
