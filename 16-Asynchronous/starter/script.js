@@ -705,6 +705,16 @@ Promise.race([getPromise('tanzania'), timeout(1)])
 
 // Promise.allSettled – It returns all promises after they have been settled (either fulfilled or rejected)
 
+Promise.allSettled([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another succes'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+// Promise.any – It returns the first promise that is fulfilled and ignores any rejected promises
+
 Promise.any([
   Promise.resolve('Success'),
   Promise.reject('ERROR'),
