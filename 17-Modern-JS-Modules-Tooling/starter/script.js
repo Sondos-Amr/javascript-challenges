@@ -8,8 +8,15 @@ addToCart('eggs', 10);
 console.log(price);
 console.log(tq);
 */
+/*
 console.log('import');
 import * as ShoppingCart from './shoppingCart.js';
+*/
+// ShoppingCart.addToCart('eggs', 30);
 
-ShoppingCart.addToCart('eggs', 30);
+import add, { totalPrice as price, tq } from './shoppingCart.js';
+add('pizz', 4);
+console.log(price);
+console.log(tq);
+
 // ShoppingCart.totalPrice;
