@@ -82,3 +82,18 @@ console.log(shoppingCarts2.totalPrice);
 console.log(shoppingCarts2.totalQuantity);
 // console.log(shoppingCarts2.shippingCost);
 // shoppingCarts2.orderStock('suger', 1);
+
+// CommonJS Modules
+
+// EXPORT
+export.addToCart = function (product, quantity) {
+    cart.push({
+      product,
+      quantity,
+    });
+    console.log(`${quantity} ${product} added to cart`);
+  };
+
+  // IMPORT
+
+  const {addToCart} = require("./shoppingCart.js");
