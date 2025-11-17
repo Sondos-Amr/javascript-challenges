@@ -42,3 +42,43 @@ const getLastPost = async function () {
 
 const lastPost = await getLastPost();
 console.log(lastPost);
+
+// The Module Pattern
+
+const shoppingCarts2 = (function () {
+  const cart = [];
+  const shippingCost = 10;
+  const totalPrice = 257;
+  const totalQuantity = 23;
+
+  const addToCart = function (product, quantity) {
+    cart.push({
+      product,
+      quantity,
+    });
+    console.log(`${quantity} ${product} added to cart`);
+  };
+
+  const orderStock = function (product, quantity) {
+    console.log(`${quantity} ${product} ordered from supplier`);
+  };
+
+  return {
+    addToCart,
+    cart,
+    totalPrice,
+    totalQuantity,
+    // shippingCost,
+    // orderStock,
+  };
+})();
+
+console.log(shoppingCarts2);
+shoppingCarts2.addToCart('eggs', 14);
+shoppingCarts2.addToCart('bread', 11);
+
+console.log(shoppingCarts2.cart);
+console.log(shoppingCarts2.totalPrice);
+console.log(shoppingCarts2.totalQuantity);
+// console.log(shoppingCarts2.shippingCost);
+// shoppingCarts2.orderStock('suger', 1);
