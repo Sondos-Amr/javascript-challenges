@@ -86,14 +86,20 @@ console.log(shoppingCarts2.totalQuantity);
 // CommonJS Modules
 
 // EXPORT
-export.addToCart = function (product, quantity) {
-    cart.push({
-      product,
-      quantity,
-    });
-    console.log(`${quantity} ${product} added to cart`);
-  };
+// export.addToCart = function (product, quantity) {
+//     cart.push({
+//       product,
+//       quantity,
+//     });
+//     console.log(`${quantity} ${product} added to cart`);
+//   };
 
-  // IMPORT
+//   // IMPORT
 
-  const {addToCart} = require("./shoppingCart.js");
+//   const {addToCart} = require("./shoppingCart.js");
+
+//  A Brief Introduction to the Command Line
+
+// Introduction to NPM
+
+import cloneDeep from 'lodash-es';
