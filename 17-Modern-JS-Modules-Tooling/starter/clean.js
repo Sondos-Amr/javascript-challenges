@@ -20,6 +20,7 @@ const spendingLimits = Object.freeze({
 // const limit = ele => spendingLimits?.[ele.user] ?? 0;
 const getLimit = user => spendingLimits[user] ?? 0;
 
+// Pure function
 const addExpense = function (
   state,
   limits,
@@ -41,11 +42,11 @@ const addExpense = function (
     : state;
 };
 
-const newBudget1 = addExpense(budget, spendingLimits, 100000, 'Pizza 🍕');
+const newBudget1 = addExpense(budget, spendingLimits, 10, 'Pizza 🍕');
 console.log(newBudget1);
 
 const newBudget2 = addExpense(
-  budget,
+  newBudget1,
   spendingLimits,
   100,
   'Going to movies 🍿',
@@ -53,7 +54,7 @@ const newBudget2 = addExpense(
 );
 console.log(newBudget2);
 
-const newBudget3 = addExpense(budget, spendingLimits, 200, 'Stuff', 'Jay');
+const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 console.log(newBudget3);
 
 const checkExpenses = function () {
