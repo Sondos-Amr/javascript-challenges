@@ -65,20 +65,25 @@ const checkExpenses = (state, limits) =>
 const finalBudget = checkExpenses(newBudget3, spendingLimits);
 console.log(finalBudget);
 
-const logBigExpenses = function (bigLimit) {
-  let output = '';
-  for (const entry of budget) {
-    entry.value <= -bigLimit
-      ? (output += `${entry.description.slice(-2)} / `)
-      : '';
-  }
-  output = output.slice(0, -2);
+const logBigExpenses = function (state, bigLimit) {
+  // let output = '';
+  // for (const entry of state) {
+  //   entry.value <= -bigLimit
+  //     ? (output += `${entry.description.slice(-2)} / `)
+  //     : '';
+  // }
+  // output = output.slice(0, -2);
 
-  // const result = budget
+  const bigExpenses = state
+    .filter(entry => entry.value <= -bigLimit)
+    .map(entry => entry.description.slice(-2))
+    .join(' / ');
+  console.log(bigExpenses);
+  // const result = state
   //   .filter(el => el.value <= -bigLimit)
   //   .map(el => el.description.slice(-2))
   //   .join(' / ');
   // console.log(result);
 };
 
-logBigExpenses(100);
+logBigExpenses(finalBudget, 500);
