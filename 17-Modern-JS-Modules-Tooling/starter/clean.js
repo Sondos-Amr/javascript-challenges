@@ -29,20 +29,32 @@ const addExpense = function (
 ) {
   const cleanUser = user.toLowerCase();
 
-  if (value <= getLimit(cleanUser)) {
-    return [
-      ...state,
-      {
-        value: -value,
-        description,
-        user: cleanUser,
-      },
-    ];
-  }
+  return value <= getLimit(cleanUser)
+    ? [
+        ...state,
+        {
+          value: -value,
+          description,
+          user: cleanUser,
+        },
+      ]
+    : state;
 };
-addExpense(budget, spendingLimits, 10, 'Pizza 🍕');
-addExpense(budget, spendingLimits, 100, 'Going to movies 🍿', 'Matilda');
-addExpense(budget, spendingLimits, 200, 'Stuff', 'Jay');
+
+const newBudget1 = addExpense(budget, spendingLimits, 100000, 'Pizza 🍕');
+console.log(newBudget1);
+
+const newBudget2 = addExpense(
+  budget,
+  spendingLimits,
+  100,
+  'Going to movies 🍿',
+  'Matilda'
+);
+console.log(newBudget2);
+
+const newBudget3 = addExpense(budget, spendingLimits, 200, 'Stuff', 'Jay');
+console.log(newBudget3);
 
 const checkExpenses = function () {
   // budget.forEach(ele =>
