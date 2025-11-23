@@ -74,11 +74,17 @@ const logBigExpenses = function (state, bigLimit) {
   // }
   // output = output.slice(0, -2);
 
-  const bigExpenses = state
+  // const bigExpenses = state
+  //   .filter(entry => entry.value <= -bigLimit)
+  //   .map(entry => entry.description.slice(-2))
+  //   .join(' / ');
+  // console.log(bigExpenses);
+
+  const bigExpenses2 = state
     .filter(entry => entry.value <= -bigLimit)
-    .map(entry => entry.description.slice(-2))
-    .join(' / ');
-  console.log(bigExpenses);
+    .reduce((str, cur) => `${str} / ${cur.description.slice(-2)}`, '');
+  console.log(bigExpenses2);
+
   // const result = state
   //   .filter(el => el.value <= -bigLimit)
   //   .map(el => el.description.slice(-2))
