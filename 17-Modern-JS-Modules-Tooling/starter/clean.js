@@ -18,7 +18,7 @@ const spendingLimits = Object.freeze({
 // spendingLimits.sondos = 47;
 // console.log(spendingLimits);
 // const limit = ele => spendingLimits?.[ele.user] ?? 0;
-const getLimit = user => spendingLimits[user] ?? 0;
+const getLimit = (limit, user) => limit[user] ?? 0;
 
 // Pure function
 const addExpense = function (
@@ -30,7 +30,7 @@ const addExpense = function (
 ) {
   const cleanUser = user.toLowerCase();
 
-  return value <= getLimit(cleanUser)
+  return value <= getLimit(limits, cleanUser)
     ? [
         ...state,
         {
@@ -57,18 +57,19 @@ console.log(newBudget2);
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 console.log(newBudget3);
 
-const checkExpenses = function () {
-  // budget.forEach(ele =>
+const checkExpenses = function (state, limits) {
+  // newBudget3.forEach(ele =>
   //   ele.value < -limit(ele) ? (ele.flag = 'limit') : null
   // );
 
-  // for (const entry of budget)
+  // for (const entry of newBudget3)
   //   entry.value <= -limit(entry) ? (entry.flag = 'limit') : null;
 
-  for (const entry of budget)
-    if (entry.value <= -getLimit(entry)) entry.flag = 'limit';
+  for (const entry of state)
+    if (entry.value <= -getLimit(limits, entry)) entry.flag = 'limit';
 };
-checkExpenses();
+checkExpenses(newBudget3, spendingLimits);
+console.log(newBudget3);
 
 const logBigExpenses = function (bigLimit) {
   let output = '';
